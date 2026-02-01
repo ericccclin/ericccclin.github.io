@@ -15,111 +15,73 @@
             padding: 0;
             color: #333;
             background-color: #fff;
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* 點擊連結平滑捲動 */
         }
 
         a { text-decoration: none; color: #333; }
         * { box-sizing: border-box; }
 
         /* --------------------------------------
-           1. 頂部藍色橫條 (Top Bar) - 捲動時會消失
-           -------------------------------------- */
-        .top-bar {
-            background-color: #dbe8f4;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .top-donate-btn {
-            background-color: transparent;
-            border: 1px solid #000;
-            padding: 8px 30px;
-            font-size: 18px;
-            color: #000;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: "PMingLiU", "新細明體", serif;
-        }
-        
-        .top-donate-btn:hover { background-color: rgba(255,255,255,0.5); }
-
-        /* --------------------------------------
-           2. 主導覽列 (Main Header) - 固定在頂端
+           主導覽列 (Sticky Header)
            -------------------------------------- */
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* 左右分佈 */
             align-items: center;
             padding: 15px 40px;
             background-color: #fff;
             border-bottom: 1px solid #eee;
-            /* 讓主導覽列固定在螢幕最上方 */
+            /* 固定在頂端 */
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 80px; /* 設定固定高度以便計算 */
+            height: 80px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 微微陰影增加立體感 */
         }
 
+        /* 左側：Logo + 標題 */
         .brand-area { display: flex; align-items: center; gap: 15px; }
-        .site-logo { width: 50px; height: 50px; object-fit: contain; }
-        .site-title { font-size: 24px; color: #333; letter-spacing: 1px; }
-
-        .nav-area { display: flex; align-items: center; gap: 30px; }
-        nav.main-nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: 25px; }
-        nav.main-nav a { font-size: 18px; color: #555; transition: color 0.2s; }
-        nav.main-nav a:hover { color: #000; }
         
-        .search-icon { width: 20px; height: 20px; color: #555; }
-
-        /* --------------------------------------
-           3. 第二層導覽列 (Sub Nav) - 分頁標
-           -------------------------------------- */
-        .sub-nav-bar {
-            background-color: #f8f9fa; /* 淺灰底色區分 */
-            border-bottom: 1px solid #ddd;
-            width: 100%;
-            /* 讓它黏在主導覽列下方 */
-            position: sticky;
-            top: 80px; /* 這裡的值必須等於 header 的高度 */
-            z-index: 999;
-            display: flex;
-            justify-content: center; /* 置中排列 */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        .site-logo { 
+            width: 50px; 
+            height: 50px; 
+            object-fit: contain; 
         }
-
-        .sub-nav-bar ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .sub-nav-bar li {
-            margin: 0;
-        }
-
-        .sub-nav-bar a {
-            display: block;
-            padding: 15px 30px;
-            font-size: 18px;
-            color: #555;
+        
+        .site-title { 
+            font-size: 24px; 
+            color: #333; 
+            letter-spacing: 1px;
             font-weight: bold;
-            border-bottom: 3px solid transparent; /* 預設無底線 */
-            transition: all 0.2s;
         }
 
-        /* 滑鼠移過去或點擊時的樣式 */
-        .sub-nav-bar a:hover {
-            color: #1a73e8;
-            background-color: #edf2fc;
-            border-bottom: 3px solid #1a73e8;
+        /* 右側：導覽選單 (現在放贊助項目的連結) */
+        .nav-area { display: flex; align-items: center; }
+        
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+            gap: 30px; /* 選單間距 */
+        }
+        
+        nav a { 
+            font-size: 18px; 
+            color: #555; 
+            font-weight: bold;
+            transition: color 0.2s;
+            padding: 10px 0;
+        }
+        
+        /* 滑鼠移過去的效果 */
+        nav a:hover { 
+            color: #1a73e8; 
+            border-bottom: 2px solid #1a73e8; /* 增加底線效果 */
         }
 
         /* --------------------------------------
-           4. 內容區與 Banner
+           內容區與 Banner
            -------------------------------------- */
         .page-header {
             width: 100%;
@@ -152,13 +114,14 @@
             max-width: 960px;
             margin: 0 auto;
             padding: 40px 24px;
+            min-height: 600px; /* 確保頁面夠長 */
         }
 
-        /* 錨點定位修正：避免標題被兩層導覽列擋住 */
+        /* 區塊設定 */
         section { 
             margin-bottom: 80px; 
-            /* scroll-margin-top = Header高度(80) + SubNav高度(約54) + 緩衝(20) */
-            scroll-margin-top: 160px; 
+            /* 因為 Header 固定在上面，需要設定偏移量，避免標題被擋住 */
+            scroll-margin-top: 100px; 
         }
 
         h2 {
@@ -170,7 +133,12 @@
             padding: 10px 15px;
         }
 
-        .text-content p { font-size: 18px; line-height: 1.8; }
+        .text-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            min-height: 50px; /* 預留高度給空白內容 */
+        }
 
         footer {
             background-color: #f1f3f4;
@@ -180,49 +148,34 @@
             margin-top: 50px;
         }
         
-        /* RWD */
+        /* RWD 手機版調整 */
         @media (max-width: 768px) {
-            header { flex-direction: column; height: auto; position: static; }
-            .sub-nav-bar { position: sticky; top: 0; overflow-x: auto; justify-content: flex-start; }
-            .sub-nav-bar ul { width: 100%; justify-content: space-between; }
-            .sub-nav-bar a { padding: 15px 15px; font-size: 16px; white-space: nowrap; }
+            header { flex-direction: column; height: auto; padding: 15px; }
+            .nav-area { margin-top: 15px; width: 100%; overflow-x: auto; }
+            nav ul { width: 100%; justify-content: space-between; gap: 15px; }
+            nav a { font-size: 16px; white-space: nowrap; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <button class="top-donate-btn" onclick="location.href='support.html'">立即贊助</button>
-    </div>
-
     <header>
         <div class="brand-area">
-            <img src="https://via.placeholder.com/50x50?text=Logo" alt="Logo" class="site-logo">
+            <img src="images.jpeg" alt="Logo" class="site-logo">
             <a href="index.html" class="site-title">國立臺灣大學經濟學系學生...</a>
         </div>
 
         <div class="nav-area">
-            <nav class="main-nav">
+            <nav>
                 <ul>
-                    <li><a href="index.html">首頁</a></li>
-                    <li><a href="#">活動回顧</a></li>
-                    <li><a href="#">關於我們</a></li>
-                    </ul>
+                    <li><a href="#goal">贊助目標</a></li>
+                    <li><a href="#feedback">贊助回饋</a></li>
+                    <li><a href="#plan">支持方案</a></li>
+                    <li><a href="#how-to">如何贊助</a></li>
+                </ul>
             </nav>
-            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
         </div>
     </header>
-
-    <nav class="sub-nav-bar">
-        <ul>
-            <li><a href="#goal">贊助目標</a></li>
-            <li><a href="#feedback">贊助回饋</a></li>
-            <li><a href="#plan">支持方案</a></li>
-            <li><a href="#how-to">如何贊助</a></li>
-        </ul>
-    </nav>
 
     <div class="page-header">
         <div class="header-text">
@@ -233,22 +186,26 @@
     <main>
         <section id="goal">
             <h2>贊助目標</h2>
-            <div class="text-content"><p>Ａ</p></div>
+            <div class="text-content">
+                </div>
         </section>
 
         <section id="feedback">
             <h2>贊助回饋</h2>
-            <div class="text-content"><p>Ｂ</p></div>
+            <div class="text-content">
+                </div>
         </section>
 
         <section id="plan">
             <h2>支持方案</h2>
-            <div class="text-content"><p>Ｃ</p></div>
+            <div class="text-content">
+                </div>
         </section>
 
         <section id="how-to">
             <h2>如何贊助</h2>
-            <div class="text-content"><p>Ｄ</p></div>
+            <div class="text-content">
+                </div>
         </section>
     </main>
 

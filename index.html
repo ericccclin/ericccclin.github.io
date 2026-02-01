@@ -6,7 +6,7 @@
     <title>國立臺灣大學經濟學系學生會</title>
     
     <style>
-        /* 全站字體設定：優先使用新細明體 */
+        /* 全站字體設定：新細明體 */
         body {
             font-family: "PMingLiU", "新細明體", serif;
             margin: 0;
@@ -20,12 +20,16 @@
             color: #333;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         /* --------------------------------------
            1. 頂部藍色橫條 (Top Bar)
            -------------------------------------- */
         .top-bar {
-            background-color: #dbe8f4; /* 截圖中的淺藍色 */
-            height: 100px;             /* 您可以依需求調整高度 */
+            background-color: #dbe8f4; /* 淺藍色背景 */
+            height: 100px;             
             display: flex;
             justify-content: center;
             align-items: center;
@@ -38,9 +42,10 @@
             padding: 8px 30px;
             font-size: 18px;
             color: #000;
-            border-radius: 4px; /* 微微圓角 */
-            transition: background-color 0.2s;
+            border-radius: 4px;
+            cursor: pointer;
             font-family: "PMingLiU", "新細明體", serif;
+            transition: background-color 0.2s;
         }
 
         .top-donate-btn:hover {
@@ -56,7 +61,10 @@
             align-items: center;
             padding: 15px 40px;
             background-color: #fff;
-            border-bottom: 1px solid #eee; /* 淡淡的分隔線 */
+            border-bottom: 1px solid #eee;
+            position: sticky; /* 讓導覽列黏在頂端 (選用) */
+            top: 0;
+            z-index: 1000;
         }
 
         /* 左側：Logo + 標題 */
@@ -67,7 +75,7 @@
         }
 
         .site-logo {
-            width: 50px;  /* Logo 大小，請依實際圖片調整 */
+            width: 50px;  
             height: 50px;
             object-fit: contain;
         }
@@ -76,7 +84,8 @@
             font-size: 24px;
             color: #333;
             letter-spacing: 1px;
-            white-space: nowrap; /* 不換行 */
+            white-space: nowrap; 
+            font-weight: bold;
         }
 
         /* 右側：選單 + 搜尋 */
@@ -98,13 +107,14 @@
             font-size: 18px;
             color: #555;
             transition: color 0.2s;
+            font-weight: bold;
         }
 
         nav a:hover {
             color: #000;
         }
 
-        /* 搜尋圖示 (用 SVG 繪製) */
+        /* 搜尋圖示 */
         .search-icon {
             width: 20px;
             height: 20px;
@@ -113,17 +123,21 @@
         }
 
         /* --------------------------------------
-           3. 內容與 Banner (維持原樣)
+           3. 橫幅 Banner (改成 horizon.jpg)
            -------------------------------------- */
         .banner {
             position: relative;
             width: 100%;
             height: 320px;
-            background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0STQ4nWCpNFmj5GiLjUv6MORNnk-vQyTHIZ0LtFWRTtZTAYOuppZB1NveeOp1yZVu41nm9zoN_kFeAMJes1fw-M7aj4ilqALvjt7hoLLc_RNHRWHw80J3HhhrOGjHsGFZ8YUDIrnSZf843iTVMlW-41NBSn0rDja0QlHqU3ZcuKV2E_UVwbxbILhI2Q=w16383'); 
+            /* 這裡已換成 horizon.jpg */
+            background-image: url('horizon.jpg'); 
             background-size: cover;
             background-position: center;
         }
 
+        /* --------------------------------------
+           4. 內容區
+           -------------------------------------- */
         main {
             max-width: 960px;
             margin: 0 auto;
@@ -132,9 +146,15 @@
         }
 
         h2 {
+            font-size: 24px;
             border-bottom: 1px solid #ccc;
             padding-bottom: 10px;
             margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
         }
 
         footer {
@@ -147,8 +167,9 @@
 
         /* RWD 手機版調整 */
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; padding: 15px; }
-            .nav-area { flex-wrap: wrap; justify-content: center; }
+            header { flex-direction: column; gap: 15px; padding: 15px; height: auto; }
+            .nav-area { flex-wrap: wrap; justify-content: center; width: 100%; }
+            nav ul { gap: 15px; }
             .site-title { font-size: 20px; }
         }
     </style>
@@ -156,19 +177,19 @@
 <body>
 
     <div class="top-bar">
-        <a href="support.html" class="top-donate-btn">立即贊助</a>
+        <button class="top-donate-btn" onclick="location.href='support.html'">立即贊助</button>
     </div>
 
     <header>
         <div class="brand-area">
-            <img src="https://via.placeholder.com/50x50?text=Logo" alt="Logo" class="site-logo">
+            <img src="images.jpeg" alt="Logo" class="site-logo">
             <a href="#" class="site-title">國立臺灣大學經濟學系學生...</a>
         </div>
 
         <div class="nav-area">
             <nav>
                 <ul>
-                    <li><a href="#">首頁</a></li>
+                    <li><a href="index.html">首頁</a></li>
                     <li><a href="#">活動回顧</a></li>
                     <li><a href="#">關於我們</a></li>
                     <li><a href="support.html">立即贊助</a></li>
