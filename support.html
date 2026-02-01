@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>贊助支持 - 國立臺灣大學經濟學系學生會</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
-        /* 全局設定 (保持與首頁一致) */
         :root {
-            --primary-color: #2e2e2e;
-            --accent-color: #000000;
+            --primary-text: #3c4043;
+            --link-color: #1a73e8; /* Google 連結藍色 */
             --bg-color: #ffffff;
-            --section-bg: #f8f9fa;
-            --nav-height: 64px;
+            --divider: #dadce0;
         }
 
         * {
@@ -21,203 +23,213 @@
         }
 
         body {
-            font-family: "Google Sans", "Noto Sans TC", sans-serif;
-            background-color: var(--bg-color);
-            color: var(--primary-color);
+            font-family: 'Noto Sans TC', 'Roboto', sans-serif;
+            color: var(--primary-text);
             line-height: 1.6;
-            scroll-behavior: smooth; /* 讓點擊連結滑動更平順 */
+            scroll-behavior: smooth;
         }
 
-        /* 導覽列 */
+        /* 導覽列 (與首頁保持一致) */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: var(--nav-height);
-            padding: 0 24px;
+            height: 64px;
+            padding: 0 40px;
             background-color: #fff;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .logo-area {
-            font-size: 1.25rem;
+        .site-title {
+            font-size: 22px;
             font-weight: 500;
-            color: #3c4043;
+            color: #5f6368;
             text-decoration: none;
-            display: flex;
-            align-items: center;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
+        nav ul { display: flex; list-style: none; gap: 30px; }
         nav a {
             text-decoration: none;
-            color: #3c4043;
-            font-size: 0.95rem;
+            color: #5f6368;
+            font-size: 14px;
             font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
         }
+        nav a:hover { color: #000; }
 
-        nav a:hover {
-            background-color: #f1f3f4;
-        }
-
-        /* 這是返回首頁的按鈕樣式 */
-        .back-home {
-            color: #1a73e8;
-        }
-
-        /* Hero Banner (比較小的 header banner) */
-        .page-banner {
+        /* 贊助頁 Banner (較窄) */
+        .page-header {
             width: 100%;
-            height: 200px;
-            background-color: #f0f0f0;
-            background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0SRpCFi9gRTkstPsOKzcrEi4dC9q9BH6Tx0gQ9i8gieEbbZiqLcgcfg22tPqrWMlw8VZc_7lbzCk_DeGctt0Snns9AlXlznSOTVwnOt_46DjJHZ9eGHbexuFglR0lnwUwN8EqFvBXh2Bbhc_1u9xlM5k9l3JuvUx8C_jakyDzTCj9W0XT7S71faMK3s=w16383'); /* 抓取到的第二個網站圖片 */
+            height: 240px;
+            background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0SRpCFi9gRTkstPsOKzcrEi4dC9q9BH6Tx0gQ9i8gieEbbZiqLcgcfg22tPqrWMlw8VZc_7lbzCk_DeGctt0Snns9AlXlznSOTVwnOt_46DjJHZ9eGHbexuFglR0lnwUwN8EqFvBXh2Bbhc_1u9xlM5k9l3JuvUx8C_jakyDzTCj9W0XT7S71faMK3s=w16383');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: flex-end;
+            position: relative;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3); /* 稍微加深遮罩 */
         }
 
-        .banner-title {
+        .header-text {
+            position: relative;
             width: 100%;
-            padding: 30px 24px;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 24px 30px 24px;
         }
 
-        .banner-title h1 {
+        .header-text h1 {
             color: #fff;
-            font-size: 2rem;
-            max-width: 960px;
-            margin: 0 auto;
+            font-size: 34px;
+            font-weight: 700;
         }
 
-        /* 主要內容區 */
-        .main-content {
+        /* 內容容器 */
+        main {
             max-width: 960px;
-            margin: 0 auto;
-            padding: 40px 24px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        /* 頁內目錄連結 (Table of Contents Style) */
+        .toc {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .toc a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
         }
 
         /* 區塊樣式 */
         section {
             margin-bottom: 60px;
-            padding-top: 20px; /* 為了配合錨點定位 */
+            scroll-margin-top: 80px; /* 避免錨點被 header 擋住 */
         }
 
+        /* 模擬 Google Sites 的標題樣式 */
         h2 {
-            font-size: 1.8rem;
-            margin-bottom: 24px;
+            font-size: 26px;
             color: #202124;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 16px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            font-weight: 400;
+            position: relative;
         }
-
-        .content-box {
-            background-color: #fff;
-            padding: 24px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        
+        /* 標題旁的小連結 icon (模擬) */
+        h2::after {
+            content: "🔗";
+            font-size: 14px;
+            opacity: 0;
+            margin-left: 10px;
+            cursor: pointer;
         }
+        h2:hover::after { opacity: 0.5; }
 
-        .content-box p {
-            font-size: 1.1rem;
+        /* 內容文字區 */
+        .text-content {
+            font-size: 16px;
             color: #3c4043;
-            white-space: pre-wrap; /* 保留換行格式 */
+            background: transparent;
         }
 
         /* 頁尾 */
         footer {
-            background-color: #f8f9fa;
+            background-color: #f1f3f4;
+            padding: 30px;
             text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #5f6368;
-            border-top: 1px solid #e8eaed;
-            margin-top: 40px;
-        }
-
-        /* 響應式 */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
-            }
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 10px;
-            }
+            font-size: 12px;
+            color: #616161;
+            margin-top: 80px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo-area">國立臺灣大學經濟學系學生會</a>
+        <a href="index.html" class="site-title">國立臺灣大學經濟學系學生會</a>
         <nav>
             <ul>
-                <li><a href="index.html" class="back-home">← 返回首頁</a></li>
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="#">活動回顧</a></li>
+                <li><a href="#">關於我們</a></li>
+                <li><a href="support.html" style="color:#000; border-bottom:2px solid #000;">立即贊助</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="header-text">
+            <h1>贊助與支持</h1>
+        </div>
+    </div>
+
+    <main>
+        <nav class="toc">
+            <ul>
                 <li><a href="#goal">贊助目標</a></li>
                 <li><a href="#feedback">贊助回饋</a></li>
                 <li><a href="#plan">支持方案</a></li>
                 <li><a href="#how-to">如何贊助</a></li>
             </ul>
         </nav>
-    </header>
 
-    <div class="page-banner">
-        <div class="banner-title">
-            <h1>贊助支持計畫</h1>
-        </div>
-    </div>
-
-    <main class="main-content">
-        
         <section id="goal">
             <h2>贊助目標</h2>
-            <div class="content-box">
+            <div class="text-content">
                 <p>Ａ</p>
             </div>
         </section>
 
         <section id="feedback">
             <h2>贊助回饋</h2>
-            <div class="content-box">
+            <div class="text-content">
                 <p>Ｂ</p>
             </div>
         </section>
 
         <section id="plan">
             <h2>支持方案</h2>
-            <div class="content-box">
+            <div class="text-content">
                 <p>Ｃ</p>
             </div>
         </section>
 
         <section id="how-to">
             <h2>如何贊助</h2>
-            <div class="content-box">
+            <div class="text-content">
                 <p>Ｄ</p>
             </div>
         </section>
-
     </main>
 
     <footer>
-        © 2024 國立臺灣大學經濟學系學生會
+        <p>Report abuse | Page details</p>
     </footer>
 
 </body>

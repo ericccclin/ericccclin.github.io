@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>國立臺灣大學經濟學系學生會</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* 全局設定 */
         :root {
-            --primary-color: #2e2e2e; /* 深灰黑色，模擬 Google Sites 預設文字 */
-            --accent-color: #000000;  /* 黑色強調 */
+            /* Google Sites 標準配色 */
+            --primary-text: #3c4043;
+            --secondary-text: #5f6368;
+            --link-color: #3c4043;
             --bg-color: #ffffff;
-            --nav-height: 64px;
+            --nav-border: #dadce0;
         }
 
         * {
@@ -20,144 +25,139 @@
         }
 
         body {
-            font-family: "Google Sans", "Noto Sans TC", sans-serif;
+            /* 設定與 Google Sites 相同的字體堆疊 */
+            font-family: 'Noto Sans TC', 'Roboto', sans-serif;
+            color: var(--primary-text);
             background-color: var(--bg-color);
-            color: var(--primary-color);
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* 導覽列 (Navigation Bar) */
+        /* 導覽列 */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: var(--nav-height);
-            padding: 0 24px;
+            height: 64px;
+            padding: 0 40px; /* Google Sites 預設邊距較寬 */
             background-color: #fff;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            border-bottom: 1px solid transparent; /* 預設無邊框，滑動時可加 */
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* 微微陰影 */
         }
 
-        .logo-area {
-            font-size: 1.25rem;
+        .site-title {
+            font-size: 22px;
             font-weight: 500;
-            color: #3c4043;
+            color: #5f6368;
             text-decoration: none;
-            display: flex;
-            align-items: center;
+            letter-spacing: -0.5px;
         }
 
-        /* 導覽選單 */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 30px;
         }
 
         nav a {
             text-decoration: none;
-            color: #3c4043;
-            font-size: 0.95rem;
+            color: var(--secondary-text);
+            font-size: 14px;
             font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            text-transform: uppercase; /* Google Sites 英文有時會大寫，中文無影響 */
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-bottom 0.2s;
         }
 
-        nav a:hover {
-            background-color: #f1f3f4;
+        nav a:hover, nav a.active {
+            color: #000;
+            border-bottom: 2px solid #000; /* Google Sites 導覽列選中樣式 */
         }
 
-        nav a.active {
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        /* Hero Banner 區域 (模擬封面圖) */
-        .hero-section {
+        /* 橫幅 (Banner) */
+        .banner {
+            position: relative;
             width: 100%;
-            height: 300px; /* 您可以根據需求調整高度 */
-            background-color: #f0f0f0; /* 預設灰底 */
-            background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0STQ4nWCpNFmj5GiLjUv6MORNnk-vQyTHIZ0LtFWRTtZTAYOuppZB1NveeOp1yZVu41nm9zoN_kFeAMJes1fw-M7aj4ilqALvjt7hoLLc_RNHRWHw80J3HhhrOGjHsGFZ8YUDIrnSZf843iTVMlW-41NBSn0rDja0QlHqU3ZcuKV2E_UVwbxbILhI2Q=w16383'); /* 使用從頁面抓取到的圖片連結 */
+            height: 320px;
+            background-image: url('https://lh3.googleusercontent.com/sitesv/APaQ0STQ4nWCpNFmj5GiLjUv6MORNnk-vQyTHIZ0LtFWRTtZTAYOuppZB1NveeOp1yZVu41nm9zoN_kFeAMJes1fw-M7aj4ilqALvjt7hoLLc_RNHRWHw80J3HhhrOGjHsGFZ8YUDIrnSZf843iTVMlW-41NBSn0rDja0QlHqU3ZcuKV2E_UVwbxbILhI2Q=w16383'); /* 使用原站圖片 */
             background-size: cover;
             background-position: center;
             display: flex;
-            align-items: flex-end; /* 標題靠下 */
+            align-items: flex-end; /* 文字靠下 */
             justify-content: flex-start;
         }
 
-        .hero-title {
-            padding: 40px;
+        /* 遮罩，讓文字更清楚 */
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.2); 
+        }
+
+        .banner-content {
+            position: relative;
             width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); /* 漸層陰影讓文字更清楚 */
-        }
-
-        .hero-title h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            max-width: 1200px;
+            max-width: 1160px; /* Google Sites 寬版限制 */
             margin: 0 auto;
+            padding: 0 24px 48px 24px;
         }
 
-        /* 主要內容區 */
-        .main-content {
-            max-width: 960px;
-            margin: 40px auto;
-            padding: 0 24px;
-            min-height: 400px;
+        .banner-content h1 {
+            color: #ffffff;
+            font-size: 38px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .content-block h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        /* 內容區塊 */
+        main {
+            max-width: 960px; /* Google Sites 內容區預設寬度 */
+            margin: 0 auto;
+            padding: 60px 24px;
+            min-height: 50vh;
+        }
+
+        h2 {
+            font-size: 24px;
             color: #202124;
-            border-bottom: 2px solid #e8eaed;
-            padding-bottom: 10px;
+            margin-bottom: 24px;
+            font-weight: 400;
+            border-bottom: 1px solid #dadce0; /* 標題下方分隔線 */
+            padding-bottom: 12px;
         }
 
-        .content-block p {
-            font-size: 1.1rem;
+        p {
+            font-size: 16px;
+            line-height: 1.8;
             color: #3c4043;
+            margin-bottom: 16px;
         }
 
         /* 頁尾 */
         footer {
-            background-color: #f8f9fa;
+            background-color: #f1f3f4;
+            padding: 30px;
             text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #5f6368;
-            border-top: 1px solid #e8eaed;
+            font-size: 12px;
+            color: #616161;
         }
 
-        /* 響應式設計 (手機版) */
+        /* RWD */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                height: auto;
-                padding: 10px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                margin-top: 10px;
-                gap: 10px;
-            }
-
-            .hero-title h1 {
-                font-size: 1.8rem;
-                padding-left: 0;
-            }
+            header { padding: 0 20px; }
+            nav ul { display: none; } /* 手機版暫時隱藏選單，簡化處理 */
+            .banner-content h1 { font-size: 28px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#" class="logo-area">國立臺灣大學經濟學系學生會</a>
+        <a href="#" class="site-title">國立臺灣大學經濟學系學生會</a>
         <nav>
             <ul>
                 <li><a href="#" class="active">首頁</a></li>
@@ -168,21 +168,21 @@
         </nav>
     </header>
 
-    <div class="hero-section">
-        <div class="hero-title">
+    <div class="banner">
+        <div class="banner-content">
             <h1>國立臺灣大學經濟學系學生會</h1>
         </div>
     </div>
 
-    <main class="main-content">
-        <section class="content-block">
-            <h2>最新消息</h2>
+    <main>
+        <section>
+            <h2>最新公告</h2>
             <p>blablabla</p>
         </section>
     </main>
 
     <footer>
-        &copy; 2024 國立臺灣大學經濟學系學生會
+        <p>Report abuse | Page details</p>
     </footer>
 
 </body>
