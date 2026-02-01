@@ -15,7 +15,7 @@
             padding: 0;
             color: #333;
             background-color: #fff;
-            scroll-behavior: smooth; /* 點擊連結平滑捲動 */
+            scroll-behavior: smooth;
         }
 
         a { text-decoration: none; color: #333; }
@@ -26,21 +26,25 @@
            -------------------------------------- */
         header {
             display: flex;
-            justify-content: space-between; /* 左右分佈 */
+            justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
             background-color: #fff;
             border-bottom: 1px solid #eee;
-            /* 固定在頂端 */
             position: sticky;
             top: 0;
             z-index: 1000;
             height: 80px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* 微微陰影增加立體感 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* 左側：Logo + 標題 */
-        .brand-area { display: flex; align-items: center; gap: 15px; }
+        /* 左側：Logo + 完整標題 */
+        .brand-area { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            flex-shrink: 0;
+        }
         
         .site-logo { 
             width: 50px; 
@@ -53,9 +57,12 @@
             color: #333; 
             letter-spacing: 1px;
             font-weight: bold;
+            /* 修正：允許換行以顯示完整文字 */
+            white-space: normal;
+            line-height: 1.2;
         }
 
-        /* 右側：導覽選單 (現在放贊助項目的連結) */
+        /* 右側：贊助項目導覽 */
         .nav-area { display: flex; align-items: center; }
         
         nav ul { 
@@ -63,7 +70,7 @@
             list-style: none; 
             margin: 0; 
             padding: 0; 
-            gap: 30px; /* 選單間距 */
+            gap: 30px; 
         }
         
         nav a { 
@@ -72,12 +79,12 @@
             font-weight: bold;
             transition: color 0.2s;
             padding: 10px 0;
+            white-space: nowrap;
         }
         
-        /* 滑鼠移過去的效果 */
         nav a:hover { 
             color: #1a73e8; 
-            border-bottom: 2px solid #1a73e8; /* 增加底線效果 */
+            border-bottom: 2px solid #1a73e8;
         }
 
         /* --------------------------------------
@@ -114,13 +121,12 @@
             max-width: 960px;
             margin: 0 auto;
             padding: 40px 24px;
-            min-height: 600px; /* 確保頁面夠長 */
+            min-height: 600px;
         }
 
-        /* 區塊設定 */
+        /* 調整錨點位置 */
         section { 
             margin-bottom: 80px; 
-            /* 因為 Header 固定在上面，需要設定偏移量，避免標題被擋住 */
             scroll-margin-top: 100px; 
         }
 
@@ -137,7 +143,7 @@
             font-size: 18px;
             line-height: 1.8;
             color: #333;
-            min-height: 50px; /* 預留高度給空白內容 */
+            min-height: 50px;
         }
 
         footer {
@@ -153,7 +159,8 @@
             header { flex-direction: column; height: auto; padding: 15px; }
             .nav-area { margin-top: 15px; width: 100%; overflow-x: auto; }
             nav ul { width: 100%; justify-content: space-between; gap: 15px; }
-            nav a { font-size: 16px; white-space: nowrap; }
+            nav a { font-size: 16px; }
+            .site-title { font-size: 20px; text-align: center; }
         }
     </style>
 </head>
@@ -162,7 +169,7 @@
     <header>
         <div class="brand-area">
             <img src="images.jpeg" alt="Logo" class="site-logo">
-            <a href="index.html" class="site-title">國立臺灣大學經濟學系學生...</a>
+            <a href="index.html" class="site-title">國立臺灣大學經濟學系學生會</a>
         </div>
 
         <div class="nav-area">

@@ -62,7 +62,7 @@
             padding: 15px 40px;
             background-color: #fff;
             border-bottom: 1px solid #eee;
-            position: sticky; /* 讓導覽列黏在頂端 (選用) */
+            position: sticky; /* 黏性定位 */
             top: 0;
             z-index: 1000;
         }
@@ -72,6 +72,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-shrink: 0; /* 防止 Logo 被壓縮 */
         }
 
         .site-logo {
@@ -84,8 +85,10 @@
             font-size: 24px;
             color: #333;
             letter-spacing: 1px;
-            white-space: nowrap; 
             font-weight: bold;
+            /* 讓文字自動換行，確保顯示完整 */
+            white-space: normal;
+            line-height: 1.2;
         }
 
         /* 右側：選單 + 搜尋 */
@@ -108,6 +111,7 @@
             color: #555;
             transition: color 0.2s;
             font-weight: bold;
+            white-space: nowrap; /* 選單項目不換行 */
         }
 
         nav a:hover {
@@ -123,13 +127,13 @@
         }
 
         /* --------------------------------------
-           3. 橫幅 Banner (改成 horizon.jpg)
+           3. 橫幅 Banner (horizon.jpg)
            -------------------------------------- */
         .banner {
             position: relative;
             width: 100%;
             height: 320px;
-            /* 這裡已換成 horizon.jpg */
+            /* 請確保 horizon.jpg 在同目錄下 */
             background-image: url('horizon.jpg'); 
             background-size: cover;
             background-position: center;
@@ -169,8 +173,9 @@
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; padding: 15px; height: auto; }
             .nav-area { flex-wrap: wrap; justify-content: center; width: 100%; }
-            nav ul { gap: 15px; }
-            .site-title { font-size: 20px; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            /* 手機版字體稍微縮小，避免過長 */
+            .site-title { font-size: 20px; text-align: center; }
         }
     </style>
 </head>
@@ -183,7 +188,7 @@
     <header>
         <div class="brand-area">
             <img src="images.jpeg" alt="Logo" class="site-logo">
-            <a href="#" class="site-title">國立臺灣大學經濟學系學生...</a>
+            <a href="index.html" class="site-title">國立臺灣大學經濟學系學生會</a>
         </div>
 
         <div class="nav-area">
