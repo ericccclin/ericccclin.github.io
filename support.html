@@ -7,256 +7,474 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     
     <style>
-        /* --------------------------------------
-           關鍵設定：平滑捲動
-           -------------------------------------- */
+        /* =========================================
+           1. 全域變數與重置
+           ========================================= */
+        :root {
+            --primary-blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --text-main: #333333;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --border-color: #e0e0e0;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            --header-height: 80px;
+        }
+
         html {
-            /* 這行讓點擊錨點時產生滑動效果 */
             scroll-behavior: smooth;
         }
 
-        /* --------------------------------------
-           全站基礎設定
-           -------------------------------------- */
         body {
             margin: 0;
             padding: 0;
-            color: #404040;
-            background-color: #f7f7f7;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            /* 內文使用思源黑體 */
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.7;
         }
 
-        a { text-decoration: none; color: inherit; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; padding: 0; margin: 0; }
         * { box-sizing: border-box; }
 
-        /* --------------------------------------
-           Header: 維持新細明體
-           -------------------------------------- */
+        /* =========================================
+           2. Header (維持新細明體 + Sticky)
+           ========================================= */
         header {
             font-family: "PMingLiU", "新細明體", serif;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
+            padding: 0 40px;
             background-color: #fff;
-            border-bottom: 1px solid #eee;
-            position: sticky; /* 固定在頂端 */
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
             top: 0;
             z-index: 1000;
-            height: 80px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        .brand-area { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
-        .site-logo { width: 50px; height: 50px; object-fit: contain; }
-        
+        .brand-area { display: flex; align-items: center; gap: 15px; }
+        .site-logo { width: 45px; height: 45px; object-fit: contain; }
         .site-title { 
-            font-size: 24px; 
-            color: #222; 
-            font-weight: bold;
-            white-space: normal;
-            line-height: 1.2;
+            font-size: 22px; 
+            font-weight: bold; 
+            color: #2c3e50; 
+            letter-spacing: 1px;
         }
 
-        .nav-area { display: flex; align-items: center; }
-        nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: 30px; }
-        
-        nav a { 
-            font-size: 18px; 
-            color: #666; 
-            font-weight: bold;
-            transition: all 0.2s;
-            padding: 10px 0;
-            cursor: pointer;
+        .nav-area ul { display: flex; gap: 30px; }
+        .nav-area a { 
+            font-size: 16px; 
+            font-weight: bold; 
+            color: #555; 
+            position: relative;
+            padding: 5px 0;
         }
-        nav a:hover { color: #000; }
-
-        /* --------------------------------------
-           主要內容區 (報導者風格)
-           -------------------------------------- */
-        main {
-            font-family: 'Noto Sans TC', sans-serif;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 24px;
-            min-height: 600px;
+        .nav-area a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s;
         }
+        .nav-area a:hover { color: #000; }
+        .nav-area a:hover::after { width: 100%; }
 
-        /* 頁面標題 Banner */
-        .page-title-block {
+        /* =========================================
+           3. Hero Section (大型橫幅)
+           ========================================= */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            /* 使用 horizon.jpg 或 fallback */
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('horizon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* 視差滾動效果 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 40px 0 20px;
+            color: #fff;
+            margin-bottom: 50px;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             font-family: 'Noto Sans TC', sans-serif;
         }
-        .page-title-block h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 10px;
+        .hero-content p {
+            font-size: 18px;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
         }
-        .page-title-block p {
+
+        /* =========================================
+           4. 雙欄佈局 (Sidebar + Content)
+           ========================================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+            padding: 0 24px 80px;
+            position: relative;
+        }
+
+        /* 左側 Sidebar (桌面版顯示) */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 100px; /* Header高度 + 緩衝 */
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .toc-list li { margin-bottom: 10px; }
+        .toc-list a {
+            display: block;
+            padding: 10px 15px;
+            border-left: 3px solid transparent;
+            color: #666;
+            font-weight: 500;
+        }
+        .toc-list a:hover, .toc-list a.active {
+            border-left-color: var(--primary-blue);
+            color: var(--primary-blue);
+            background-color: #e8f0fe;
+        }
+
+        /* 右側主要內容 */
+        .main-content {
+            flex-grow: 1;
+            /* 防止內容溢出 */
+            min-width: 0; 
+        }
+
+        /* =========================================
+           5. 區塊樣式 (Section Styling)
+           ========================================= */
+        section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            scroll-margin-top: 100px; /* 錨點定位偏移 */
+            border: 1px solid #fff;
+            transition: transform 0.3s ease;
+        }
+        
+        /* 區塊標題 */
+        .section-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .section-header h2 {
+            font-size: 28px;
+            color: #222;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-icon {
+            color: var(--primary-blue);
+            font-size: 24px;
+        }
+
+        /* =========================================
+           6. 贊助流程 (Timeline Style)
+           ========================================= */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 40px;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        
+        .timeline-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            background: #fff;
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
+            color: var(--primary-blue);
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .timeline-content h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .timeline-content p {
+            margin: 0;
             color: #666;
             font-size: 16px;
         }
 
-        /* 區塊樣式 */
-        section {
-            background-color: #fff;
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            border: 1px solid #f0f0f0;
-
-            /* 關鍵：設定捲動後的頂部偏移量 (Header高80px + 緩衝20px = 100px) 
-               這樣滑動過去時，標題才不會被 Header 擋住 */
-            scroll-margin-top: 100px;
-        }
-
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 30px;
-            position: relative;
-            padding-left: 15px;
-            border-left: 4px solid #1a73e8;
-            line-height: 1.4;
-        }
-
-        h3 {
-            font-size: 19px;
-            font-weight: 600;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #000;
-        }
-
-        .text-content {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #404040;
-        }
-
-        /* 風格化組件 */
-        .step-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .step-list li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 25px;
-        }
-        .step-list li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 10px;
-            height: 10px;
-            background-color: #1a73e8;
-            border-radius: 50%;
-        }
-        .step-list li::after {
-            content: "";
-            position: absolute;
-            left: 4px;
-            top: 20px;
-            bottom: -20px;
-            width: 2px;
-            background-color: #e0e0e0;
-        }
-        .step-list li:last-child::after { display: none; }
-        
-        .step-title {
-            font-weight: 700;
-            color: #1a73e8;
-            font-size: 18px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
+        /* =========================================
+           7. 支付方式 (Grid Cards)
+           ========================================= */
         .payment-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
-        .payment-method {
-            background-color: #fafafa;
-            border: 1px solid #eee;
-            padding: 25px;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .payment-method:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-color: #1a73e8;
-        }
-        .payment-method ul { margin: 10px 0 10px 20px; padding: 0; }
-        .payment-method li { margin-bottom: 5px; color: #555; }
 
-        .btn-group {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+        .payment-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 30px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: 500;
-            border-radius: 6px;
-            transition: all 0.2s;
-            cursor: pointer;
-            text-align: center;
-            font-family: 'Noto Sans TC', sans-serif;
+        
+        .payment-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 25px rgba(26, 115, 232, 0.15);
         }
-        .btn-primary {
-            background-color: #1a73e8;
-            color: #fff;
-            box-shadow: 0 2px 4px rgba(26, 115, 232, 0.2);
+
+        /* 特殊標籤 */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e8f0fe;
+            color: var(--primary-blue);
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
         }
-        .btn-primary:hover {
-            background-color: #1557b0;
-            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.3);
+
+        .payment-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #222;
         }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid #ccc;
+
+        .payment-features {
+            margin-bottom: 20px;
+            font-size: 15px;
             color: #555;
         }
-        .btn-outline:hover {
-            border-color: #1a73e8;
-            color: #1a73e8;
-            background-color: #fff;
+        .payment-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .payment-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
         }
 
-        footer {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #333;
-            color: #ccc;
-            padding: 40px 20px;
+        /* 按鈕組 */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 0;
             text-align: center;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: #fff;
+        }
+        .btn-primary:hover { background-color: var(--dark-blue); }
+        
+        .btn-outline {
+            border: 1px solid var(--border-color);
+            color: #555;
+            background: #fff;
+        }
+        .btn-outline:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        /* =========================================
+           8. 贊助目標 (Visual Cards)
+           ========================================= */
+        .goal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .goal-card {
+            background: #fafafa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .goal-img-placeholder {
+            width: 100%;
+            height: 140px;
+            background-color: #ddd; /* 圖片預留位 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
             font-size: 14px;
+        }
+        .goal-body { padding: 20px; }
+        .goal-body h4 { margin: 0 0 10px; font-size: 18px; }
+        .goal-body p { font-size: 14px; color: #666; margin: 0; }
+
+        /* =========================================
+           9. FAQ (Accordion) & 物流
+           ========================================= */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        summary {
+            background: #fcfcfc;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            list-style: none; /* 隱藏預設箭頭 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '+';
+            font-size: 20px;
+            color: #999;
+        }
+        details[open] summary::after { content: '-'; }
+        
+        .faq-content {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            color: #555;
+        }
+
+        /* 物流區塊樣式 */
+        .shipping-info {
+            background: #e3f2fd;
+            border-left: 5px solid var(--primary-blue);
+            padding: 20px;
+            border-radius: 4px;
+            color: #0d47a1;
+        }
+
+        /* =========================================
+           10. Footer
+           ========================================= */
+        footer {
+            background-color: #263238;
+            color: #b0bec5;
+            padding: 60px 0;
             margin-top: 60px;
+            font-size: 14px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 16px; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a:hover { color: #fff; }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #37474f;
+        }
+
+        /* =========================================
+           RWD 響應式設定
+           ========================================= */
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar { 
+                display: none; /* 手機版隱藏側邊目錄，使用上方導覽列 */ 
+            }
+            .hero-section { height: 300px; }
+            .hero-content h1 { font-size: 32px; }
         }
 
         @media (max-width: 768px) {
             header { flex-direction: column; height: auto; padding: 15px; }
             .nav-area { margin-top: 15px; width: 100%; overflow-x: auto; }
-            nav ul { width: 100%; justify-content: space-between; gap: 20px; }
-            nav a { white-space: nowrap; font-size: 16px; }
-            main { padding: 0 15px; margin-top: 20px; }
-            section { padding: 25px 20px; }
-            .btn { width: 100%; }
+            .nav-area ul { width: 100%; justify-content: space-between; gap: 20px; }
+            .nav-area a { white-space: nowrap; }
+            
+            section { padding: 25px; }
+            .timeline::before { left: 10px; }
+            .timeline-number { left: -10px; width: 36px; height: 36px; font-size: 16px; }
+            .timeline-item { padding-left: 40px; }
         }
     </style>
 </head>
@@ -280,106 +498,206 @@
         </div>
     </header>
 
-    <div class="page-title-block">
-        <h1>贊助與支持</h1>
-        <p>您的支持，是我們前進的動力</p>
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>支持經濟系，共創未來</h1>
+            <p>您的每一份支持，都是推動我們前進的重要力量</p>
+        </div>
     </div>
 
-    <main>
+    <div class="container">
         
-        <section id="how-to">
-            <h2>贊助流程步驟</h2>
-            <div class="text-content">
-                <ul class="step-list">
-                    <li>
-                        <span class="step-title">Step 1：選擇方案</span>
-                        瀏覽並挑選您喜愛的經濟系周邊紀念品方案。
-                    </li>
-                    <li>
-                        <span class="step-title">Step 2：填寫資料</span>
-                        留下聯絡資訊與收件地址（若需開立抵稅收據，請務必填寫完整身分證字號/統編）。
-                    </li>
-                    <li>
-                        <span class="step-title">Step 3：進行支付</span>
-                        透過線上支付連結、銀行轉帳或台大校方代收管道匯款。
-                    </li>
-                    <li>
-                        <span class="step-title">Step 4：確認回覆</span>
-                        完成後系統將寄送確認信；若透過校方代收，需至指定網站填寫捐款細項，出納組核對後約兩週可入帳。
-                    </li>
-                </ul>
-                
-                <div class="btn-group">
-                    <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" class="btn btn-primary">前往綠界支付 (ECPay)</a>
-                    <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" class="btn btn-outline">校方捐款填寫頁</a>
-                </div>
-            </div>
-        </section>
+        <aside class="sidebar">
+            <div class="sidebar-title">導覽目錄</div>
+            <ul class="toc-list">
+                <li><a href="#how-to">贊助流程</a></li>
+                <li><a href="#plan">支付方式</a></li>
+                <li><a href="#feedback">物流與運費</a></li>
+                <li><a href="#goal">贊助目標</a></li>
+                <li><a href="#faq">常見問題</a></li>
+            </ul>
+        </aside>
 
-        <section id="plan">
-            <h2>支付方式</h2>
-            <div class="payment-grid">
-                
-                <div class="payment-method">
-                    <h3>校方代收管道（可全額抵稅）</h3>
-                    <p><strong>匯款銀行：</strong> 玉山銀行帳戶</p>
-                    <p style="margin-top:10px; font-size:15px; color:#666;">
-                        適合需要申報所得稅抵減的系友。捐款後請務必至台大財務處捐款網站填寫捐款人資訊，以便開立正式收據。
-                    </p>
-                    <div style="margin-top:15px;">
-                        <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" style="color:#1a73e8; font-weight:500;">前往台大財務處捐款網站 →</a>
+        <main class="main-content">
+            
+            <section id="how-to">
+                <div class="section-header">
+                    <h2>贊助流程</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-number">1</div>
+                        <div class="timeline-content">
+                            <h3>選擇方案</h3>
+                            <p>瀏覽頁面下方的贊助目標與回饋品，挑選您喜愛的支持方案。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">2</div>
+                        <div class="timeline-content">
+                            <h3>填寫資料</h3>
+                            <p>留下聯絡資訊與收件地址。<strong>若需開立抵稅收據，請務必填寫完整身分證字號或統編。</strong></p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">3</div>
+                        <div class="timeline-content">
+                            <h3>進行支付</h3>
+                            <p>選擇您方便的方式：線上刷卡 (綠界)、校方代收管道、或直接銀行轉帳。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">4</div>
+                        <div class="timeline-content">
+                            <h3>確認回覆</h3>
+                            <p>完成後將收到確認信；若透過校方代收，出納組核對後約兩週可入帳。</p>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="payment-method">
-                    <h3>線上支付連結：綠界 (ECPay)</h3>
-                    <ul style="list-style-type: disc; padding-left: 20px;">
-                        <li>VISA、MasterCard、JCB 國內信用卡</li>
-                        <li>Apple Pay、TWQR 行動支付</li>
-                        <li>超商代碼、超商條碼及 ATM 轉帳</li>
-                        <li>無卡分期、海外信用卡、銀聯卡及微信支付</li>
-                    </ul>
-                    <div style="margin-top:15px;">
-                        <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" style="color:#1a73e8; font-weight:500;">前往綠界支付頁面 →</a>
+            <section id="plan">
+                <div class="section-header">
+                    <h2>支付方式</h2>
+                </div>
+                <div class="payment-grid">
+                    
+                    <div class="payment-card">
+                        <span class="badge">最推薦</span>
+                        <h3>線上支付 (ECPay)</h3>
+                        <ul class="payment-features">
+                            <li>信用卡 (Visa, Master, JCB)</li>
+                            <li>Apple Pay / TWQR</li>
+                            <li>超商代碼 / ATM 轉帳</li>
+                            <li>支援海外信用卡</li>
+                        </ul>
+                        <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" class="btn btn-primary">前往綠界支付</a>
+                    </div>
+
+                    <div class="payment-card">
+                        <span class="badge">可抵稅</span>
+                        <h3>校方代收管道</h3>
+                        <p style="font-size:14px; color:#666; margin-bottom:15px;">適合需要申報所得稅抵減的系友。匯款至玉山銀行帳戶。</p>
+                        <ul class="payment-features">
+                            <li>全額抵稅證明</li>
+                            <li>需填寫校方表單</li>
+                        </ul>
+                        <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" class="btn btn-outline">台大捐款網站</a>
+                    </div>
+
+                    <div class="payment-card">
+                        <h3>銀行轉帳</h3>
+                        <p style="font-size:14px; color:#666; margin-bottom:15px;">適用於小額贊助或不需要抵稅證明的支持者。</p>
+                        <div style="background:#f5f5f5; padding:10px; border-radius:4px; margin-bottom:15px;">
+                            <strong>郵局 (700)</strong><br>
+                            帳號：00012360632402
+                        </div>
+                        <a href="#" class="btn btn-outline" style="pointer-events: none; opacity: 0.6;">內部對帳專用</a>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="feedback">
+                <div class="section-header">
+                    <h2>物流及運費說明</h2>
+                </div>
+                <div class="shipping-info">
+                    <strong>📦 運送方式：</strong> 郵寄 / 快遞<br>
+                    <strong>⏱ 出貨時間：</strong> 視紀念品製作進度而定，製作完成後將儘速寄出。
+                </div>
+                <p style="margin-top:20px; font-size:14px; color:#888;">
+                    * 註：如遇國定假日或天災等不可抗力因素，出貨可能順延，敬請見諒。
+                </p>
+            </section>
+
+            <section id="goal">
+                <div class="section-header">
+                    <h2>贊助目標</h2>
+                </div>
+                <div class="goal-grid">
+                    <div class="goal-card">
+                        <div class="goal-img-placeholder">活動照片 (待補)</div>
+                        <div class="goal-body">
+                            <h4>學術活動支持</h4>
+                            <p>支持系上舉辦學術講座、研討會，提升學術風氣。</p>
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-img-placeholder">學生照片 (待補)</div>
+                        <div class="goal-body">
+                            <h4>學生權益提升</h4>
+                            <p>改善系館公共空間、更新硬體設備，優化學習環境。</p>
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-img-placeholder">活動照片 (待補)</div>
+                        <div class="goal-body">
+                            <h4>系隊與社團發展</h4>
+                            <p>補助系隊比賽經費與學生活動，促進多元發展。</p>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="payment-method">
-                    <h3>銀行轉帳（內部對帳）</h3>
-                    <p style="color:#666; margin-bottom: 5px;">適用對象：小額贊助或不需要抵稅證明</p>
-                    <p style="font-size: 18px; font-weight: bold; color:#222;">
-                        郵局 (700) 00012360632402
-                    </p>
+            <section id="faq">
+                <div class="section-header">
+                    <h2>常見問題 (FAQ)</h2>
                 </div>
+                
+                <details>
+                    <summary>請問捐款收據何時會收到？</summary>
+                    <div class="faq-content">
+                        若是透過校方代收系統，填寫完畢經核對後，學校出納組約需兩週作業時間，收據將會以郵寄方式寄至您填寫的地址。
+                    </div>
+                </details>
 
-            </div>
-        </section>
+                <details>
+                    <summary>可以使用海外信用卡嗎？</summary>
+                    <div class="faq-content">
+                        可以的。請選擇「綠界支付 (ECPay)」管道，該系統支援海外發行的 VISA、MasterCard 與銀聯卡。
+                    </div>
+                </details>
 
-        <section id="feedback">
-            <h2>物流及運費說明</h2>
-            <div class="text-content">
-                <div style="margin-bottom: 20px;">
-                    <h3 style="font-size: 18px; color:#444;">郵寄/快遞</h3>
-                    <p>我們將會把紀念品直接寄送給系友。</p>
-                </div>
-                <div>
-                    <h3 style="font-size: 18px; color:#444;">預計出貨時間</h3>
-                    <p>視品項製作進度而定，敬請耐心等候。</p>
-                </div>
-            </div>
-        </section>
+                <details>
+                    <summary>如果匯款後忘記填寫表單怎麼辦？</summary>
+                    <div class="faq-content">
+                        請儘速透過 Email 或粉絲專頁聯繫學生會，並提供您的匯款帳號末五碼與匯款時間，我們將協助您核對。
+                    </div>
+                </details>
+            </section>
 
-        <section id="goal">
-            <h2>贊助目標</h2>
-            <div class="text-content">
-                <p style="color:#888; font-style:italic;">（待補充內容...）</p>
-            </div>
-        </section>
-
-    </main>
+        </main>
+    </div>
 
     <footer>
-        <p>© 2026 國立臺灣大學經濟學系學生會</p>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>關於我們</h4>
+                <ul>
+                    <li><a href="index.html">學生會首頁</a></li>
+                    <li><a href="#">組織章程</a></li>
+                    <li><a href="#">歷屆成員</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>相關連結</h4>
+                <ul>
+                    <li><a href="https://giving.ntu.edu.tw/" target="_blank">台大捐款網站</a></li>
+                    <li><a href="http://www.econ.ntu.edu.tw/" target="_blank">台大經濟系官網</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>聯絡資訊</h4>
+                <ul>
+                    <li>Email: ntu.econ.student@gmail.com</li>
+                    <li>地址: 台北市大安區羅斯福路四段1號</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 國立臺灣大學經濟學系學生會 | Designed for NTU Economics
+        </div>
     </footer>
 
 </body>
