@@ -38,7 +38,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* 左側：Logo + 完整標題 */
+        /* 左側：Logo + 標題 */
         .brand-area { 
             display: flex; 
             align-items: center; 
@@ -57,12 +57,11 @@
             color: #333; 
             letter-spacing: 1px;
             font-weight: bold;
-            /* 修正：允許換行以顯示完整文字 */
             white-space: normal;
             line-height: 1.2;
         }
 
-        /* 右側：贊助項目導覽 */
+        /* 右側：導覽選單 */
         .nav-area { display: flex; align-items: center; }
         
         nav ul { 
@@ -124,26 +123,85 @@
             min-height: 600px;
         }
 
-        /* 調整錨點位置 */
+        /* 區塊樣式 */
         section { 
-            margin-bottom: 80px; 
+            margin-bottom: 60px; 
             scroll-margin-top: 100px; 
+            border-bottom: 1px solid #eee;
+            padding-bottom: 40px;
         }
+        
+        section:last-child { border-bottom: none; }
 
         h2 {
             font-size: 26px;
             border-left: 5px solid #333;
             padding-left: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             background-color: #fcfcfc;
-            padding: 10px 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #1a73e8;
         }
 
         .text-content {
             font-size: 18px;
             line-height: 1.8;
             color: #333;
-            min-height: 50px;
+        }
+
+        /* 特殊樣式：流程步驟 */
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #ddd;
+        }
+        .step-list strong {
+            color: #000;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* 特殊樣式：支付方式卡片 */
+        .payment-method {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .payment-method ul { margin-left: 20px; }
+
+        /* 按鈕樣式 */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            margin-right: 10px;
+            background-color: #1a73e8;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn:hover { background-color: #1557b0; color: #fff; }
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #1a73e8;
+            color: #1a73e8;
+        }
+        .btn-outline:hover {
+            background-color: #1a73e8;
+            color: #fff;
         }
 
         footer {
@@ -154,7 +212,7 @@
             margin-top: 50px;
         }
         
-        /* RWD 手機版調整 */
+        /* RWD */
         @media (max-width: 768px) {
             header { flex-direction: column; height: auto; padding: 15px; }
             .nav-area { margin-top: 15px; width: 100%; overflow-x: auto; }
@@ -175,10 +233,10 @@
         <div class="nav-area">
             <nav>
                 <ul>
+                    <li><a href="#how-to">贊助流程</a></li>
+                    <li><a href="#plan">支付方式</a></li>
+                    <li><a href="#feedback">物流運費</a></li>
                     <li><a href="#goal">贊助目標</a></li>
-                    <li><a href="#feedback">贊助回饋</a></li>
-                    <li><a href="#plan">支持方案</a></li>
-                    <li><a href="#how-to">如何贊助</a></li>
                 </ul>
             </nav>
         </div>
@@ -191,33 +249,90 @@
     </div>
 
     <main>
-        <section id="goal">
-            <h2>贊助目標</h2>
+        <section id="how-to">
+            <h2>贊助流程步驟說明</h2>
             <div class="text-content">
+                <ul class="step-list">
+                    <li>
+                        <strong>Step 1：選擇方案</strong>
+                        瀏覽並挑選您喜愛的經濟系周邊紀念品方案。
+                    </li>
+                    <li>
+                        <strong>Step 2：填寫資料</strong>
+                        留下聯絡資訊與收件地址（若需開立抵稅收據，請務必填寫完整身分證字號/統編）。
+                    </li>
+                    <li>
+                        <strong>Step 3：進行支付</strong>
+                        透過線上支付連結、銀行轉帳或台大校方代收管道匯款。
+                    </li>
+                    <li>
+                        <strong>Step 4：確認回覆</strong>
+                        完成後系統將寄送確認信；若透過校方代收，需至指定網站填寫捐款細項，出納組核對後約兩週可入帳。
+                    </li>
+                </ul>
+                
+                <div style="margin-top: 20px;">
+                    <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" class="btn">前往綠界支付 (ECPay)</a>
+                    <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" class="btn btn-outline">校方捐款填寫頁</a>
+                    <a href="https://homepage.ntu.edu.tw/~ntufinance/receipt.html" target="_blank" class="btn btn-outline">校方收據查詢</a>
                 </div>
-        </section>
-
-        <section id="feedback">
-            <h2>贊助回饋</h2>
-            <div class="text-content">
-                </div>
+            </div>
         </section>
 
         <section id="plan">
-            <h2>支持方案</h2>
+            <h2>支付方式</h2>
             <div class="text-content">
+                
+                <div class="payment-method">
+                    <h3>1. 校方代收管道（可全額抵稅）</h3>
+                    <p><strong>匯款銀行：</strong>玉山銀行帳戶。</p>
+                    <p><strong>說明：</strong>適合需要申報所得稅抵減的系友。捐款後請務必至台大財務處捐款網站填寫捐款人資訊，以便開立正式收據。</p>
+                    <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" style="color:#1a73e8; text-decoration: underline;">👉 前往台大財務處捐款網站</a>
                 </div>
+
+                <div class="payment-method">
+                    <h3>2. 線上支付連結：綠界 (ECPay)</h3>
+                    <p>支援多種支付方式：</p>
+                    <ul>
+                        <li>VISA、MasterCard、JCB 國內信用卡（一次付清、分期及定期定額）。</li>
+                        <li>Apple Pay、TWQR 行動支付。</li>
+                        <li>超商代碼、超商條碼及 ATM 轉帳。</li>
+                        <li>無卡分期、海外信用卡、銀聯卡及微信支付。</li>
+                    </ul>
+                    <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" style="color:#1a73e8; text-decoration: underline;">👉 點擊前往綠界支付頁面</a>
+                </div>
+
+                <div class="payment-method">
+                    <h3>3. 銀行轉帳（內部對帳）</h3>
+                    <p><strong>適用對象：</strong>小額贊助或不需要抵稅證明的系友。</p>
+                    <p><strong>帳戶：</strong>郵局 (700) 00012360632402</p>
+                </div>
+
+            </div>
         </section>
 
-        <section id="how-to">
-            <h2>如何贊助</h2>
+        <section id="feedback">
+            <h2>物流及運費說明</h2>
             <div class="text-content">
-                </div>
+                <p><strong>郵寄/快遞：</strong></p>
+                <p>我們將會把紀念品直接寄送給系友。</p>
+                <br>
+                <p><strong>預計出貨時間：</strong></p>
+                <p>視品項製作進度而定，敬請耐心等候。</p>
+            </div>
         </section>
+
+        <section id="goal">
+            <h2>贊助目標</h2>
+            <div class="text-content">
+                <p>（此處內容待補...）</p>
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <p>© 2026 國立臺灣大學經濟學系學生會</p>
+        <p>© 2024 國立臺灣大學經濟學系學生會</p>
     </footer>
 
 </body>
