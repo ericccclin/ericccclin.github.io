@@ -34,7 +34,8 @@
             --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             --shadow-float: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             
-            /* 圓角與間距 */
+            /* 尺寸設定 */
+            --sidebar-width: 220px; /* 已縮小寬度 */
             --radius-xl: 20px;
             --radius-md: 12px;
             --header-h: 80px;
@@ -112,55 +113,56 @@
         .nav-link:hover { color: var(--navy-900); }
 
         /* =========================================
-           4. 佈局 Container
+           4. 佈局 Container (調整 Grid)
            ========================================= */
         .layout-container {
             max-width: 1280px;
             margin: 60px auto;
             padding: 0 32px;
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 60px;
+            /* 使用變數控制側邊欄寬度 */
+            grid-template-columns: var(--sidebar-width) 1fr;
+            gap: 40px; /* 縮小一點間距讓版面更緊湊 */
             align-items: start;
         }
 
         /* =========================================
-           5. 側邊導覽 (Sidebar) - 已調整顏色
+           5. 側邊導覽 (Sidebar)
            ========================================= */
         .sidebar {
             position: sticky;
             top: 100px;
             background: var(--bg-white);
             border-radius: var(--radius-xl);
-            padding: 32px;
+            padding: 24px; /* 縮小內距 */
             box-shadow: var(--shadow-card);
             border: 1px solid rgba(0,0,0,0.04);
         }
 
         .sidebar-title {
-            font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
-            color: var(--gold-500); font-weight: 800; margin-bottom: 24px;
+            font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--gold-500); font-weight: 800; margin-bottom: 20px;
             display: flex; align-items: center; gap: 8px;
         }
 
         .toc-link {
-            display: flex; align-items: center; padding: 14px 16px; margin-bottom: 8px;
+            display: flex; align-items: center; padding: 12px 14px; margin-bottom: 6px;
             border-radius: var(--radius-md); color: var(--text-muted);
-            font-weight: 500; font-size: 15px; transition: all 0.3s;
+            font-weight: 500; font-size: 14px; transition: all 0.3s;
             border-left: 3px solid transparent;
         }
-        .toc-link svg { margin-right: 12px; width: 20px; height: 20px; color: #CBD5E1; transition:0.3s; }
+        .toc-link svg { margin-right: 10px; width: 18px; height: 18px; color: #CBD5E1; transition:0.3s; }
         
         .toc-link:hover {
-            background: var(--navy-100); color: var(--navy-800); padding-left: 20px;
+            background: var(--navy-100); color: var(--navy-800); padding-left: 18px;
         }
         
-        /* --- Active 狀態顏色調整：改為淺藍底 + 深藍字 --- */
+        /* Active 狀態：淺藍底深藍字 */
         .toc-link.active {
-            background: #F0F7FF;  /* 淺藍色背景 */
-            color: var(--navy-800); /* 深藍色文字 */
+            background: #F0F7FF;
+            color: var(--navy-800);
             font-weight: 700;
-            border-left-color: var(--gold-500); /* 保持金色邊條 */
+            border-left-color: var(--gold-500);
         }
         .toc-link.active svg { color: var(--gold-500); }
 
@@ -169,41 +171,41 @@
            ========================================= */
         .main-content { min-width: 0; }
 
-        .page-header-text { margin-bottom: 60px; }
+        .page-header-text { margin-bottom: 50px; }
         .page-header-text h1 {
-            font-size: 42px; font-weight: 800; color: var(--navy-900); margin: 0 0 16px 0;
+            font-size: 40px; font-weight: 800; color: var(--navy-900); margin: 0 0 16px 0;
             line-height: 1.2; letter-spacing: -0.02em;
         }
-        .page-header-text p { font-size: 18px; color: var(--text-muted); max-width: 680px; }
+        .page-header-text p { font-size: 16px; color: var(--text-muted); max-width: 680px; }
         .divider { width: 60px; height: 4px; background: var(--gold-500); margin-top: 24px; border-radius: 2px; }
 
         section {
             background: var(--bg-white); border-radius: var(--radius-xl);
-            padding: 48px; margin-bottom: 48px;
+            padding: 40px; margin-bottom: 40px;
             box-shadow: var(--shadow-card); border: 1px solid rgba(0,0,0,0.03);
             scroll-margin-top: 100px; position: relative; overflow: hidden;
         }
 
         .section-heading {
-            display: flex; align-items: center; margin-bottom: 40px;
-            padding-bottom: 20px; border-bottom: 1px solid #F1F5F9;
+            display: flex; align-items: center; margin-bottom: 30px;
+            padding-bottom: 15px; border-bottom: 1px solid #F1F5F9;
         }
         .section-heading h2 {
-            font-size: 26px; color: var(--navy-900); margin: 0; font-weight: 700;
+            font-size: 24px; color: var(--navy-900); margin: 0; font-weight: 700;
             display: flex; align-items: center; gap: 12px;
         }
         .heading-icon { 
             color: var(--gold-500); background: var(--gold-100); padding: 8px;
-            border-radius: 8px; width: 40px; height: 40px;
+            border-radius: 8px; width: 36px; height: 36px;
         }
 
         /* 贊助流程 */
-        .timeline { position: relative; padding: 20px 0; }
+        .timeline { position: relative; padding: 10px 0; }
         .timeline::before {
             content: ''; position: absolute; top: 0; bottom: 0; left: 24px; width: 2px;
             background: #E2E8F0; z-index: 0;
         }
-        .step-item { position: relative; padding-left: 70px; margin-bottom: 40px; z-index: 1; }
+        .step-item { position: relative; padding-left: 70px; margin-bottom: 30px; z-index: 1; }
         .step-marker {
             position: absolute; left: 0; top: 0; width: 50px; height: 50px;
             background: var(--bg-white); border: 2px solid #E2E8F0; border-radius: 16px;
@@ -215,59 +217,65 @@
             background: var(--navy-800); color: var(--gold-500);
             border-color: var(--navy-800); transform: scale(1.1);
         }
-        .step-content h3 { margin: 0 0 8px; font-size: 19px; color: var(--navy-900); }
-        .step-content p { margin: 0; font-size: 16px; color: var(--text-muted); }
+        .step-content h3 { margin: 0 0 6px; font-size: 18px; color: var(--navy-900); }
+        .step-content p { margin: 0; font-size: 15px; color: var(--text-muted); }
 
-        /* 支付方式卡片 */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+        /* =========================================
+           7. 支付方式卡片 (修正為三個一排)
+           ========================================= */
+        .cards-grid { 
+            display: grid; 
+            /* 強制三個一排 */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; /* 縮小間距以適應 */
+        }
+        
         .pay-card {
             background: #fff; border: 1px solid #E2E8F0; border-radius: var(--radius-xl);
-            padding: 32px; transition: 0.4s; display: flex; flex-direction: column;
+            padding: 24px; /* 縮小內距 */
+            transition: 0.4s; display: flex; flex-direction: column;
         }
         .pay-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-float); border-color: var(--gold-400); }
+        
         .badge {
-            display: inline-block; padding: 4px 12px; border-radius: 20px;
-            font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
-            margin-bottom: 16px; width: fit-content;
+            display: inline-block; padding: 4px 10px; border-radius: 20px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+            margin-bottom: 12px; width: fit-content;
         }
         .bg-gold { background: var(--gold-100); color: #8F6B3D; }
         .bg-navy { background: var(--navy-100); color: var(--navy-800); }
         .bg-gray { background: #F1F5F9; color: #64748B; }
 
-        .pay-card h3 { font-size: 22px; margin: 0 0 12px 0; color: var(--navy-900); }
-        .pay-card p { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+        .pay-card h3 { font-size: 18px; margin: 0 0 10px 0; color: var(--navy-900); }
+        .pay-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
         
         .bank-info {
-            background: #F8FAFC; border: 1px solid #E2E8F0; padding: 16px;
-            border-radius: 8px; margin-bottom: 24px; font-family: 'Space Grotesk', monospace;
+            background: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px;
+            border-radius: 8px; margin-bottom: 20px; font-family: 'Space Grotesk', monospace;
         }
-        .bank-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 14px; color: #64748B; }
-        .bank-code { font-size: 18px; font-weight: 700; color: var(--navy-900); letter-spacing: 1px; }
+        .bank-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 12px; color: #64748B; }
+        .bank-code { font-size: 14px; font-weight: 700; color: var(--navy-900); letter-spacing: 0.5px; }
 
         .btn {
             margin-top: auto; display: flex; justify-content: center; align-items: center; gap: 8px;
-            padding: 14px; border-radius: 10px; font-weight: 600; transition: 0.3s; cursor: pointer;
+            padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px; transition: 0.3s; cursor: pointer;
         }
-        .btn-primary {
-            background: var(--navy-800); color: #fff; box-shadow: 0 4px 12px rgba(10, 38, 71, 0.2);
-        }
-        .btn-primary:hover {
-            background: var(--navy-700); transform: translateY(-2px); box-shadow: 0 8px 16px rgba(10, 38, 71, 0.3);
-        }
+        .btn-primary { background: var(--navy-800); color: #fff; box-shadow: 0 4px 12px rgba(10, 38, 71, 0.2); }
+        .btn-primary:hover { background: var(--navy-700); transform: translateY(-2px); box-shadow: 0 8px 16px rgba(10, 38, 71, 0.3); }
         .btn-outline { background: transparent; color: var(--navy-800); border: 2px solid #E2E8F0; }
         .btn-outline:hover { border-color: var(--navy-800); background: #F8FAFC; }
 
         /* 贊助目標 & 物流 */
-        .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+        .goals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .goal-item {
-            background: #F8FAFC; padding: 24px; border-radius: var(--radius-md);
+            background: #F8FAFC; padding: 20px; border-radius: var(--radius-md);
             border: 1px solid transparent; transition: 0.3s;
         }
         .goal-item:hover { background: #fff; border-color: var(--gold-400); box-shadow: var(--shadow-card); }
         .goal-icon {
-            width: 48px; height: 48px; background: #fff; border-radius: 12px;
+            width: 40px; height: 40px; background: #fff; border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            color: var(--navy-800); box-shadow: var(--shadow-sm); margin-bottom: 16px;
+            color: var(--navy-800); box-shadow: var(--shadow-sm); margin-bottom: 12px;
         }
 
         /* FAQ */
@@ -277,7 +285,7 @@
         }
         details[open] { border-color: var(--gold-400); box-shadow: var(--shadow-sm); }
         summary {
-            padding: 20px 24px; font-weight: 600; cursor: pointer; list-style: none;
+            padding: 18px 24px; font-weight: 600; cursor: pointer; list-style: none;
             display: flex; justify-content: space-between; align-items: center; color: var(--navy-900);
         }
         summary::-webkit-details-marker { display: none; }
@@ -304,15 +312,21 @@
         }
 
         /* RWD */
+        @media (max-width: 1200px) {
+            /* 在中型螢幕如果三個太擠，允許變兩個 */
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 1024px) {
             .layout-container { grid-template-columns: 1fr; }
             .sidebar { display: none; }
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
             header { padding: 0 20px; flex-direction: column; height: auto; padding-bottom: 10px; }
             .nav-area ul { gap: 4px; }
             .page-header-text h1 { font-size: 32px; }
             section { padding: 32px 24px; }
+            .cards-grid { grid-template-columns: 1fr; } /* 手機版變回一排 */
             .btn { width: 100%; }
         }
     </style>
@@ -427,8 +441,8 @@
                     
                     <div class="pay-card reveal delay-100">
                         <span class="badge bg-gold">最推薦</span>
-                        <h3>線上支付 (ECPay)</h3>
-                        <p>支援 VISA, MasterCard, JCB、Apple Pay 及超商代碼繳費。適合一般贊助者。</p>
+                        <h3>線上支付</h3>
+                        <p>支援 VISA, MasterCard, JCB、Apple Pay 及超商代碼繳費。</p>
                         <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" class="btn btn-primary">
                             前往綠界支付
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
@@ -437,12 +451,11 @@
 
                     <div class="pay-card reveal delay-200">
                         <span class="badge bg-navy">可抵稅</span>
-                        <h3>校方代收管道</h3>
-                        <p>適合需申報所得稅抵減之系友。款項將匯入台大校務基金，由校方開立正式收據。</p>
+                        <h3>校方代收</h3>
+                        <p>適合需申報所得稅抵減之系友。款項將匯入台大校務基金。</p>
                         
                         <div class="bank-info">
-                            <div class="bank-row"><span>銀行</span> <span>玉山銀行 (808)</span></div>
-                            <div class="bank-row"><span>帳號</span> <span class="bank-code">請詳見網站</span></div>
+                            <div class="bank-row"><span>銀行</span> <span>玉山 (808)</span></div>
                         </div>
 
                         <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" class="btn btn-outline">
@@ -453,11 +466,10 @@
                     <div class="pay-card reveal delay-300">
                         <span class="badge bg-gray">內部對帳</span>
                         <h3>銀行轉帳</h3>
-                        <p>適用小額贊助或無需抵稅證明。匯款後請務必通知學生會。</p>
+                        <p>適用小額贊助或無需抵稅證明。匯款後請通知學生會。</p>
                         
                         <div class="bank-info">
                             <div class="bank-row"><span>銀行</span> <span>郵局 (700)</span></div>
-                            <div class="bank-row"><span>帳號</span> <span class="bank-code">0001236 0632402</span></div>
                         </div>
 
                         <div class="btn" style="background:#F1F5F9; color:#94A3B8; cursor:default;">僅供轉帳使用</div>
@@ -523,14 +535,14 @@
                         只有系友才能捐款嗎？
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon arrow-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                     </summary>
-                    <div class="faq-body">不限系友，我們歡迎社會各界人士支持台大經濟系的發展。</div>
+                    <div class="faq-body">不限系友，我們歡迎社會各界人士支持台大經濟系的發展，您的每一份心意都對我們至關重要。</div>
                 </details>
                 <details>
                     <summary>
                         可以匿名贊助嗎？
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon arrow-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                     </summary>
-                    <div class="faq-body">可以。請在捐款備註欄說明「希望匿名」，我們將會在公開徵信時將您的姓名隱藏。</div>
+                    <div class="faq-body">可以。請在捐款備註欄說明「希望匿名」，我們將會在公開徵信時將您的姓名隱藏，改以「善心人士」稱呼。</div>
                 </details>
                 <details>
                     <summary>
@@ -538,6 +550,20 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon arrow-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
                     </summary>
                     <div class="faq-body">僅有透過「校方代收管道」捐款才可開立正式抵稅收據；透過綠界或直接轉帳僅供一般收據，無法用於報稅扣抵。</div>
+                </details>
+                <details>
+                    <summary>
+                        收據何時會收到？
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon arrow-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                    </summary>
+                    <div class="faq-body">若透過校方代收，學校出納組核對後約需兩週作業時間，收據將郵寄至您的地址。</div>
+                </details>
+                <details>
+                    <summary>
+                        可使用海外信用卡嗎？
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon arrow-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                    </summary>
+                    <div class="faq-body">可以。請選擇「綠界支付」管道，該平台支援 VISA、MasterCard 等海外發行之信用卡。</div>
                 </details>
                 <details>
                     <summary>
@@ -582,36 +608,29 @@
     </footer>
 
     <script>
-        // 1. 捲動顯現動畫 (Intersection Observer)
+        // 1. 捲動顯現動畫
         const revealElements = document.querySelectorAll('.reveal');
-        
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // 一旦顯示後就不再觀察，避免重複閃爍
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 }); // 顯示 10% 內容就觸發
-
+        }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // 2. 側邊欄 Active 狀態自動切換 (Scroll Spy)
+        // 2. 側邊欄 Active 狀態自動切換
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.toc-link');
-
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                // 調整 -150 是為了讓切換點更準確
                 if (pageYOffset >= (sectionTop - 150)) {
                     current = section.getAttribute('id');
                 }
             });
-
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href').includes(current)) {
@@ -623,11 +642,8 @@
         // 3. Header 縮放效果
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
         });
     </script>
 </body>
