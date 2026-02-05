@@ -7,31 +7,36 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================
-           1. 設計系統變數 (Design Tokens)
+           1. 專業設計系統變數 (Professional Design Tokens)
            ========================================= */
         :root {
-            /* 主色調：台大風格深藍 + 亮眼漸層 */
-            --primary-color: #003366; 
-            --accent-color: #E63946;  /* 活力紅橘色，用於強調 */
-            --gradient-blue: linear-gradient(135deg, #003366 0%, #2a5298 100%);
-            --gradient-accent: linear-gradient(135deg, #E63946 0%, #ff6b6b 100%);
+            /* 主色調：學術深藍 + 沉穩香檳金 */
+            --primary-navy: #0A2647;      /* 深邃權威藍 */
+            --primary-blue: #144272;      /* 明亮一點的藍 */
+            --accent-gold: #CBA16E;       /* 沉穩金色強調 */
+            --accent-gold-light: #EAD6B8; /* 淺金色背景 */
             
             /* 背景與文字 */
-            --bg-body: #f4f7f6;
-            --text-main: #2c3e50;
-            --text-light: #596775;
+            --bg-body: #F8F9FA;
+            --bg-glass: rgba(255, 255, 255, 0.85); /* 毛玻璃背景 */
+            --text-main: #1A202C;
+            --text-muted: #5C6B7F;
+            --border-light: rgba(0, 0, 0, 0.06);
             
             /* 尺寸設定 */
             --header-height: 80px;
-            --sidebar-width: 260px;
+            --sidebar-width: 280px;
+            --radius-lg: 16px;
+            --radius-md: 10px;
             
-            /* 陰影效果 */
-            --shadow-soft: 0 10px 30px -10px rgba(0, 50, 100, 0.1);
-            --shadow-hover: 0 15px 35px -5px rgba(0, 50, 100, 0.15);
+            /* 專業陰影效果 */
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
         html { scroll-behavior: smooth; }
@@ -42,18 +47,23 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             font-family: 'Noto Sans TC', sans-serif;
-            line-height: 1.7;
-            /* 增加背景細節 */
-            background-image: radial-gradient(#e0e5ec 1px, transparent 1px);
-            background-size: 30px 30px;
+            line-height: 1.75;
+            /* 更細緻的幾何背景紋理 */
+            background-image: 
+                linear-gradient(to right, rgba(10, 38, 71, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(10, 38, 71, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; padding: 0; margin: 0; }
         * { box-sizing: border-box; }
 
+        /* 通用 SVG 圖示設定 */
+        .icon { width: 1.25em; height: 1.25em; display: inline-block; vertical-align: middle; }
+
         /* =========================================
-           2. Header (新細明體 + 現代陰影)
+           2. Header (新細明體 + 精緻質感)
            ========================================= */
         header {
             font-family: "PMingLiU", "新細明體", serif;
@@ -61,36 +71,41 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px); /* 毛玻璃效果 */
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background-color: var(--bg-glass);
+            backdrop-filter: blur(12px); /* 更強的毛玻璃效果 */
+            border-bottom: 1px solid var(--border-light);
             position: sticky;
             top: 0;
             z-index: 1000;
             height: var(--header-height);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-sm);
         }
 
         .brand-area { display: flex; align-items: center; gap: 15px; }
-        .site-logo { width: 45px; height: 45px; object-fit: contain; }
+        .site-logo { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
         .site-title { 
             font-size: 22px; 
-            font-weight: bold; 
-            color: #111; 
+            font-weight: 700; 
+            color: var(--primary-navy); 
             letter-spacing: 0.5px;
         }
 
-        .nav-area ul { display: flex; gap: 25px; }
+        .nav-area ul { display: flex; gap: 10px; }
         .nav-area a {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: #555;
-            padding: 8px 12px;
-            border-radius: 6px;
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            position: relative;
         }
         .nav-area a:hover {
-            color: var(--primary-color);
-            background-color: #f0f4f8;
+            color: var(--primary-navy);
+            background-color: rgba(20, 66, 114, 0.05);
+        }
+        .nav-area a.active { /* 模擬選中狀態 */
+            color: var(--primary-navy);
+            background-color: #E8F0FE;
         }
 
         /* =========================================
@@ -98,380 +113,426 @@
            ========================================= */
         .page-wrapper {
             max-width: 1200px;
-            margin: 40px auto; /* 移除 Hero Banner，增加頂部間距 */
+            margin: 50px auto;
             padding: 0 24px;
             display: grid;
-            grid-template-columns: var(--sidebar-width) 1fr; /* 左側固定，右側自適應 */
-            gap: 40px;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            gap: 50px;
             align-items: start;
             position: relative;
         }
 
         /* =========================================
-           4. 左側 Sidebar (美化版)
+           4. 左側 Sidebar (專業導覽)
            ========================================= */
         .sidebar {
             position: sticky;
-            /* 關鍵：設定 top 讓它不會被 Header 擋住 */
-            top: calc(var(--header-height) + 30px); 
-            background: #fff;
+            top: calc(var(--header-height) + 40px);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255,255,255,0.6);
         }
 
         .sidebar-header {
-            font-size: 18px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--accent-gold);
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         
-        .toc-list li { margin-bottom: 8px; }
+        .toc-list li { margin-bottom: 6px; }
         
         .toc-list a {
             display: flex;
             align-items: center;
             padding: 12px 15px;
-            border-radius: 8px;
-            color: var(--text-light);
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
             font-weight: 500;
             font-size: 15px;
+            gap: 12px;
+            border-left: 3px solid transparent;
         }
         
+        .toc-list a svg { 
+            width: 20px; height: 20px; 
+            color: #A0AEC0; transition: 0.3s; 
+        }
+
         .toc-list a:hover {
-            background-color: #f0f7ff;
-            color: var(--primary-color);
-            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--primary-navy);
+            border-left-color: var(--accent-gold);
+            box-shadow: var(--shadow-sm);
         }
-        
-        /* 裝飾性的小圓點 */
-        .toc-list a::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background-color: #ccc;
-            border-radius: 50%;
-            margin-right: 12px;
-            transition: 0.3s;
-        }
-        .toc-list a:hover::before {
-            background-color: var(--accent-color);
-        }
+        .toc-list a:hover svg { color: var(--accent-gold); }
 
         /* =========================================
-           5. 右側內容區
+           5. 右側內容區 (Professional Content Style)
            ========================================= */
-        .main-content {
-            min-width: 0;
-        }
+        .main-content { min-width: 0; }
 
-        /* 頁面標題 (取代原本的橫幅) */
-        .page-intro {
-            margin-bottom: 40px;
-        }
+        /* 頁面標題區 */
+        .page-intro { margin-bottom: 50px; }
         .page-intro h1 {
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            color: var(--primary-navy);
+            margin-bottom: 15px;
             line-height: 1.2;
+            font-family: 'Noto Sans TC', sans-serif;
         }
         .page-intro p {
             font-size: 18px;
-            color: var(--text-light);
+            color: var(--text-muted);
+            max-width: 700px;
         }
-        /* 裝飾線 */
+        /* 精緻裝飾線 */
         .page-intro::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 80px;
             height: 4px;
-            background: var(--gradient-accent);
-            margin-top: 20px;
+            background: linear-gradient(to right, var(--accent-gold), transparent);
+            margin-top: 25px;
             border-radius: 2px;
         }
 
         /* 區塊通用樣式 */
         section {
-            background: #fff;
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow-soft);
-            scroll-margin-top: 100px; /* 修正錨點定位 */
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-lg);
+            padding: 45px;
+            margin-bottom: 45px;
+            box-shadow: var(--shadow-md);
+            scroll-margin-top: 120px;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        section:hover {
+            box-shadow: var(--shadow-lg);
         }
 
         /* 區塊標題設計 */
         .section-header h2 {
-            font-size: 24px;
-            color: #111;
-            margin-bottom: 30px;
-            display: inline-block;
-            position: relative;
-            z-index: 1;
+            font-size: 26px;
+            color: var(--primary-navy);
+            margin-bottom: 35px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        /* 標題下的螢光筆效果 */
-        .section-header h2::before {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background-color: rgba(230, 57, 70, 0.15); /* 淡淡的橘紅 */
-            z-index: -1;
-            border-radius: 4px;
-        }
+        .section-header h2 svg { color: var(--accent-gold); width: 28px; height: 28px;}
 
         /* =========================================
-           6. 贊助流程 (彩色時間軸)
+           6. 贊助流程 (專業流程圖風格)
            ========================================= */
         .timeline {
             position: relative;
-            padding: 10px 0;
+            padding: 20px 0;
         }
+        /* 連接線 */
         .timeline::before {
             content: '';
             position: absolute;
-            left: 24px;
-            top: 20px;
-            bottom: 20px;
-            width: 2px;
-            background: linear-gradient(to bottom, #e0e0e0, #fff);
+            left: 28px;
+            top: 30px;
+            bottom: 50px;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--accent-gold-light));
+            z-index: 0;
         }
         
         .timeline-item {
             position: relative;
-            padding-left: 70px;
-            margin-bottom: 35px;
+            padding-left: 80px;
+            margin-bottom: 45px;
+            z-index: 1;
         }
         
+        /* 數字節點設計 */
         .timeline-number {
             position: absolute;
             left: 0;
             top: 0;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             background: #fff;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            color: var(--primary-color);
-            font-family: 'Outfit', sans-serif; /* 數字專用字體 */
-            font-weight: 700;
-            font-size: 22px;
+            border-radius: 18px; /* 方圓形 */
+            box-shadow: var(--shadow-md);
+            color: var(--primary-navy);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2;
-            border: 2px solid #f0f0f0;
+            border: 2px solid var(--primary-blue);
             transition: 0.3s;
         }
-        
         .timeline-item:hover .timeline-number {
-            background: var(--gradient-accent);
-            color: #fff;
-            border-color: transparent;
-            transform: scale(1.1);
+            background: var(--primary-navy);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            transform: scale(1.05) rotate(-3deg);
         }
 
-        .timeline-content h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; }
-        .timeline-content p { margin: 0; color: #666; font-size: 15px; }
+        .timeline-content h3 { margin: 0 0 10px; font-size: 20px; font-weight: 700; color: var(--primary-navy); }
+        .timeline-content p { margin: 0; color: var(--text-muted); font-size: 16px; }
 
         /* =========================================
-           7. 支付方式 (彩色卡片 Grid)
+           7. 支付方式 (高質感卡片 Grid)
            ========================================= */
         .payment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .payment-card {
             background: #fff;
-            border-radius: 12px;
-            padding: 30px;
-            border: 1px solid #eee;
+            border-radius: var(--radius-lg);
+            padding: 35px;
+            border: 1px solid var(--border-light);
             position: relative;
-            transition: 0.3s;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
+            z-index: 1;
         }
         
-        /* 頂部色彩條設計 */
-        .payment-card::after {
-            content: '';
+        /* 卡片背景浮水印圖示 */
+        .card-bg-icon {
             position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 6px;
+            bottom: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            opacity: 0.05;
+            color: var(--primary-navy);
+            z-index: -1;
+            transition: 0.4s;
         }
-        /* 依據不同卡片給予不同顏色 */
-        .card-green::after { background: #28a745; } /* 綠界 */
-        .card-blue::after { background: var(--primary-color); } /* 校方 */
-        .card-gray::after { background: #6c757d; } /* 轉帳 */
+        .payment-card:hover .card-bg-icon {
+            opacity: 0.1;
+            transform: scale(1.2) rotate(10deg);
+        }
 
         .payment-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-gold-light);
         }
 
-        .payment-card h3 { font-size: 20px; margin-bottom: 15px; color: #222; }
+        .card-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        .badge-gold { background: var(--accent-gold-light); color: var(--primary-navy); }
+        .badge-blue { background: #E8F0FE; color: var(--primary-blue); }
+        .badge-gray { background: #EDF2F7; color: var(--text-muted); }
+
+        .payment-card h3 { font-size: 22px; margin-bottom: 15px; color: var(--primary-navy); font-weight: 700; }
+        .payment-card p { color: var(--text-muted); margin-bottom: 20px; }
         
         .feature-list li {
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #555;
-            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: var(--text-main);
+            padding-left: 28px;
             position: relative;
+            display: flex;
+            align-items: center;
         }
-        .feature-list li::before {
-            content: '●';
-            color: #ddd;
+        /* 使用 SVG 勾勾替代文字符號 */
+        .feature-list li svg {
             position: absolute;
             left: 0;
-            font-size: 10px;
-            top: 6px;
+            width: 18px; height: 18px;
+            color: var(--accent-gold);
         }
 
-        /* 漸層按鈕 */
-        .btn-full {
-            display: block;
+        /* 專業按鈕設計 */
+        .btn-primary, .btn-outline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             text-align: center;
-            margin-top: 20px;
-            border-radius: 8px;
+            margin-top: 25px;
+            border-radius: var(--radius-md);
             font-weight: 600;
-            color: #fff;
-            background: var(--gradient-blue);
-            box-shadow: 0 4px 10px rgba(0, 51, 102, 0.3);
             transition: 0.3s;
+            gap: 8px;
+            font-size: 16px;
         }
-        .btn-full:hover {
-            box-shadow: 0 6px 15px rgba(0, 51, 102, 0.4);
+        .btn-primary {
+            background: var(--primary-navy);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(10, 38, 71, 0.25);
+        }
+        .btn-primary:hover {
+            background: #0D305A;
             transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(10, 38, 71, 0.3);
         }
         
         .btn-outline {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            text-align: center;
-            margin-top: 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--primary-color);
-            border: 2px solid #e0e6ed;
+            border: 2px solid #E2E8F0;
+            color: var(--primary-navy);
             background: transparent;
-            transition: 0.3s;
         }
         .btn-outline:hover {
-            border-color: var(--primary-color);
-            background: #f0f7ff;
+            border-color: var(--primary-navy);
+            background: #F7FAFC;
+        }
+        .btn-disabled {
+            background: #EDF2F7; color: #A0AEC0; pointer-events: none;
         }
 
         /* =========================================
-           8. 贊助目標 (視覺化設計)
+           8. 贊助目標 (專業圖示展示)
            ========================================= */
         .goal-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
         }
         .goal-box {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: left;
             transition: 0.3s;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         .goal-box:hover {
-            background: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-gold-light);
         }
-        .goal-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-            display: inline-block;
-            background: #fff;
-            width: 60px;
-            height: 60px;
-            line-height: 60px;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .goal-icon-wrapper {
+            width: 64px; height: 64px;
+            background: var(--accent-gold-light);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary-navy);
         }
-        .goal-box h4 { margin: 10px 0; color: var(--primary-color); }
-        .goal-box p { font-size: 14px; color: #666; margin: 0; }
+        .goal-icon-wrapper svg { width: 32px; height: 32px; }
+
+        .goal-box h4 { margin: 0 0 10px; color: var(--primary-navy); font-size: 18px; font-weight: 700; }
+        .goal-box p { font-size: 15px; color: var(--text-muted); margin: 0; line-height: 1.6; }
 
         /* =========================================
-           9. FAQ 與物流
+           9. FAQ 與物流 (精緻化)
            ========================================= */
         details {
-            background: #fafafa;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            background: #fff;
+            border-radius: var(--radius-md);
+            margin-bottom: 15px;
+            border: 1px solid var(--border-light);
             transition: 0.3s;
         }
         details[open] {
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-gold-light);
         }
         summary {
-            padding: 15px 20px;
+            padding: 18px 24px;
             cursor: pointer;
             font-weight: 600;
-            color: #444;
+            color: var(--primary-navy);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            list-style: none;
         }
-        .faq-text { padding: 0 20px 20px; color: #666; font-size: 15px; }
+        summary::-webkit-details-marker { display: none; }
+        /* 自定義伸縮箭頭 SVG */
+        summary::after {
+            content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%23CBA16E' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E");
+            width: 20px; height: 20px; transition: 0.3s;
+        }
+        details[open] summary::after { transform: rotate(180deg); }
+
+        .faq-text { padding: 0 24px 24px; color: var(--text-muted); font-size: 15px; border-top: 1px solid #f0f0f0; padding-top: 20px; }
 
         /* 物流運費卡片 */
         .shipping-card {
-            background: #eef5ff;
-            border-radius: 8px;
-            padding: 25px;
+            background: linear-gradient(to right, #F0F4F8, #fff);
+            border-radius: var(--radius-lg);
+            padding: 35px;
             display: flex;
             align-items: flex-start;
-            gap: 15px;
+            gap: 25px;
+            border-left: 6px solid var(--primary-blue);
         }
-        .shipping-icon { font-size: 24px; }
+        .shipping-icon-box {
+            width: 50px; height: 50px;
+            background: #fff;
+            border-radius: 12px;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: var(--shadow-sm);
+            color: var(--primary-blue);
+        }
+        .shipping-content h4 { margin: 0 0 8px; font-size: 18px; color: var(--primary-navy); }
+        .shipping-content p { margin: 0; color: var(--text-muted); font-size: 15px; }
 
         /* =========================================
-           10. Footer (深色設計)
+           10. Footer (專業深色頁尾)
            ========================================= */
         footer {
-            background: #0f172a; /* 深藍黑 */
-            color: #94a3b8;
-            padding: 60px 0 30px;
-            margin-top: 80px;
+            background: var(--primary-navy);
+            color: #A0AEC0;
+            padding: 80px 0 30px;
+            margin-top: 100px;
+            position: relative;
         }
+        /* 頁尾頂部裝飾線 */
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent-gold);
+        }
+
         .footer-grid {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
         }
-        .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 16px; letter-spacing: 1px; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col a:hover { color: var(--accent-color); }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 17px; letter-spacing: 1px; font-weight: 700; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col a:hover { color: var(--accent-gold); }
         
         .footer-bottom {
             max-width: 1200px;
-            margin: 50px auto 0;
-            padding: 20px 24px 0;
-            border-top: 1px solid #1e293b;
+            margin: 60px auto 0;
+            padding: 25px 24px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
             font-size: 14px;
         }
@@ -479,19 +540,21 @@
         /* =========================================
            RWD 調整
            ========================================= */
-        @media (max-width: 900px) {
-            .page-wrapper { grid-template-columns: 1fr; } /* 變單欄 */
-            .sidebar { 
-                display: none; /* 手機版隱藏側邊目錄，避免佔位 */
-            }
+        @media (max-width: 1024px) {
+            .page-wrapper { grid-template-columns: 1fr; gap: 30px; }
+            .sidebar { display: none; } /* 平板以下隱藏側邊欄 */
         }
         @media (max-width: 768px) {
-            header { flex-direction: column; height: auto; padding: 15px; }
-            .nav-area { margin-top: 15px; width: 100%; overflow-x: auto; }
-            .nav-area ul { width: 100%; justify-content: space-between; gap: 15px; }
-            .nav-area a { white-space: nowrap; font-size: 15px; }
-            .page-intro h1 { font-size: 28px; }
-            section { padding: 25px; }
+            header { flex-direction: column; height: auto; padding: 15px; gap: 15px; }
+            .nav-area ul { gap: 5px; flex-wrap: wrap; justify-content: center; }
+            .nav-area a { font-size: 14px; padding: 6px 12px; }
+            
+            .page-wrapper { margin-top: 30px; }
+            .page-intro h1 { font-size: 30px; }
+            section { padding: 30px; }
+            
+            .payment-card { padding: 25px; }
+            .btn-primary, .btn-outline { width: 100%; }
         }
     </style>
 </head>
@@ -519,14 +582,32 @@
         
         <aside class="sidebar">
             <div class="sidebar-header">
-                <span>📌 快速導覽</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                </svg>
+                <span>本頁導覽</span>
             </div>
             <ul class="toc-list">
-                <li><a href="#how-to">贊助流程說明</a></li>
-                <li><a href="#plan">選擇支付方式</a></li>
-                <li><a href="#feedback">物流與運費</a></li>
-                <li><a href="#goal">我們的目標</a></li>
-                <li><a href="#faq">常見問題 Q&A</a></li>
+                <li><a href="#how-to">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+                    贊助流程說明
+                </a></li>
+                <li><a href="#plan">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                    選擇支付方式
+                </a></li>
+                <li><a href="#feedback">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+                    物流與運費
+                </a></li>
+                <li><a href="#goal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" /></svg>
+                    我們的目標
+                </a></li>
+                <li><a href="#faq">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1012.879 12.121c-.545 0-1.091-.18-1.545-.541a4.5 4.5 0 01-.982-4.982 4.5 4.5 0 015.964-5.964 4.5 4.5 0 01.982 4.982M15 21h.008v.008H15V21zm0-3h.008v.008H15V18z" /></svg>
+                    常見問題 Q&A
+                </a></li>
             </ul>
         </aside>
 
@@ -534,37 +615,40 @@
             
             <div class="page-intro">
                 <h1>贊助與支持計畫</h1>
-                <p>感謝您的支持，讓我們能持續推動系上發展，為學生創造更多價值。</p>
+                <p>您的每一份支持，都是推動經濟系學術發展與學生事務的重要力量。我們承諾妥善運用每一筆款項，為師生創造更大價值。</p>
             </div>
 
             <section id="how-to">
                 <div class="section-header">
-                    <h2>贊助流程</h2>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.159.69.159 1.006 0z" /></svg>
+                        贊助流程
+                    </h2>
                 </div>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-number">01</div>
+                        <div class="timeline-number">1</div>
                         <div class="timeline-content">
                             <h3>選擇方案</h3>
-                            <p>瀏覽頁面下方的贊助目標，挑選您想支持的項目或紀念品。</p>
+                            <p>瀏覽頁面下方的贊助目標與紀念品，挑選您想支持的項目。</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-number">02</div>
+                        <div class="timeline-number">2</div>
                         <div class="timeline-content">
                             <h3>填寫資料</h3>
                             <p>留下聯絡資訊與收件地址。<strong>若需開立抵稅收據，請務必填寫身分證字號。</strong></p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-number">03</div>
+                        <div class="timeline-number">3</div>
                         <div class="timeline-content">
                             <h3>進行支付</h3>
                             <p>我們提供綠界線上刷卡、校方代收匯款、銀行轉帳等多種管道。</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-number">04</div>
+                        <div class="timeline-number">4</div>
                         <div class="timeline-content">
                             <h3>確認回覆</h3>
                             <p>系統將寄送確認信；透過校方代收者，出納組核對後約兩週可入帳。</p>
@@ -575,44 +659,72 @@
 
             <section id="plan">
                 <div class="section-header">
-                    <h2>支付方式</h2>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>
+                        支付方式
+                    </h2>
                 </div>
                 <div class="payment-grid">
                     
-                    <div class="payment-card card-green">
-                        <div style="color:#28a745; font-size:12px; font-weight:bold; margin-bottom:5px;">RECOMMENDED</div>
+                    <div class="payment-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="card-bg-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                        
+                        <span class="card-badge badge-gold">推薦方式</span>
                         <h3>線上支付 (ECPay)</h3>
-                        <p style="color:#666; font-size:14px; margin-bottom:15px;">最快速方便的選擇，支援多種支付工具。</p>
+                        <p>最快速方便的選擇，支援多種支付工具，即時入帳。</p>
                         <ul class="feature-list">
-                            <li>信用卡 (Visa, Master, JCB)</li>
-                            <li>Apple Pay / Google Pay</li>
-                            <li>超商代碼 / ATM 虛擬帳號</li>
-                            <li>支援海外信用卡</li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                信用卡 (Visa, Master, JCB)
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                Apple Pay / Google Pay
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                支援海外信用卡
+                            </li>
                         </ul>
-                        <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" class="btn-full">前往綠界支付</a>
+                        <a href="https://p.ecpay.com.tw/5BB15E4" target="_blank" class="btn-primary">
+                            前往綠界支付
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </a>
                     </div>
 
-                    <div class="payment-card card-blue">
-                        <div style="color:var(--primary-color); font-size:12px; font-weight:bold; margin-bottom:5px;">TAX DEDUCTIBLE</div>
+                    <div class="payment-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="card-bg-icon"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.02 4.908a48.644 48.644 0 00-1.16 5.544a5.06 5.06 0 001.47 3.792c.883.883 2.254 1.003 3.198.14.297-.27.52-.653.635-1.145a1.63 1.63 0 011.602-1.307 1.63 1.63 0 011.602 1.307c.115.492.338.875.635 1.145.944.863 2.315.743 3.198-.14a5.06 5.06 0 001.47-3.792 48.664 48.664 0 00-1.16-5.544m-11.12 3.71c-.04.356-.082.714-.127 1.073m11.375-1.073c.044.356.086.714.127 1.073" /></svg>
+
+                        <span class="card-badge badge-blue">可抵稅</span>
                         <h3>校方代收管道</h3>
-                        <p style="color:#666; font-size:14px; margin-bottom:15px;">適合需要申報所得稅抵減的系友。</p>
+                        <p>適合需要申報所得稅抵減的系友。款項匯入台大校務基金。</p>
                         <ul class="feature-list">
-                            <li>可開立正式抵稅收據</li>
-                            <li>匯款至玉山銀行帳戶</li>
-                            <li>需至校方系統填寫資料</li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                可開立正式抵稅收據
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="icon"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                                需至校方系統填寫資料
+                            </li>
                         </ul>
-                        <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" class="btn-outline">台大捐款網站</a>
+                        <a href="https://giving.ntu.edu.tw/backend/FastDonation.html" target="_blank" class="btn-outline">
+                            台大捐款網站
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                        </a>
                     </div>
 
-                    <div class="payment-card card-gray">
-                        <div style="color:#666; font-size:12px; font-weight:bold; margin-bottom:5px;">INTERNAL</div>
+                    <div class="payment-card">
+                        <span class="card-badge badge-gray">內部對帳</span>
                         <h3>銀行轉帳</h3>
-                        <p style="color:#666; font-size:14px; margin-bottom:15px;">適用小額贊助或無需抵稅者。</p>
-                        <div style="background:#f5f5f5; padding:10px; border-radius:6px; margin-bottom:10px;">
+                        <p>適用小額贊助或無需抵稅者。請於匯款後通知我們。</p>
+                        <div style="background:#F7FAFC; padding:15px; border-radius:var(--radius-md); margin-bottom:20px; border:1px solid #EDF2F7;">
                             <strong>郵局 (700)</strong><br>
-                            00012360632402
+                            帳號：00012360632402
                         </div>
-                        <a href="#" style="font-size:13px; color:#888; text-decoration:underline;">僅供內部對帳使用</a>
+                        <button class="btn-disabled">
+                            僅供內部對帳使用
+                        </button>
                     </div>
 
                 </div>
@@ -620,47 +732,60 @@
 
             <section id="feedback">
                 <div class="section-header">
-                    <h2>物流及運費</h2>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+                        物流及運費
+                    </h2>
                 </div>
                 <div class="shipping-card">
-                    <div class="shipping-icon">🚚</div>
-                    <div>
-                        <h4 style="margin:0 0 5px 0;">寄送方式</h4>
-                        <p style="margin:0; color:#555; font-size:15px;">所有紀念品將透過郵局或快遞直接寄送至您指定的地址。</p>
+                    <div class="shipping-icon-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon" style="width:28px;height:28px;"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3.75h3.75M12 7.5v3.75m0-3.75l3.75-3.75m-3.75 3.75l-3.75-3.75" /></svg>
                     </div>
-                </div>
-                <div style="margin-top:20px; padding-left:15px; border-left:3px solid #ddd;">
-                    <h4 style="margin:0 0 5px 0; font-size:16px;">預計出貨時間</h4>
-                    <p style="margin:0; color:#666; font-size:14px;">視品項製作進度而定。現貨商品約 3-5 個工作天寄出；預購商品請參考個別方案說明。</p>
+                    <div class="shipping-content">
+                        <h4>寄送方式與時間</h4>
+                        <p>所有紀念品將透過郵局或快遞寄送。現貨商品約 3-5 個工作天寄出；預購商品出貨時間請參考個別方案說明。</p>
+                    </div>
                 </div>
             </section>
 
             <section id="goal">
                 <div class="section-header">
-                    <h2>贊助目標</h2>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" /></svg>
+                        贊助目標
+                    </h2>
                 </div>
                 <div class="goal-container">
                     <div class="goal-box">
-                        <div class="goal-icon">🎓</div>
-                        <h4>學術講座</h4>
-                        <p>支持舉辦大師講座與研討會，提升學術視野。</p>
+                        <div class="goal-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                        </div>
+                        <h4>學術講座與研討</h4>
+                        <p>邀請國內外知名學者舉辦大師講座，提升系上學術研究風氣與國際視野。</p>
                     </div>
                     <div class="goal-box">
-                        <div class="goal-icon">🏟️</div>
-                        <h4>空間優化</h4>
-                        <p>改善系館公共空間與討論室硬體設備。</p>
+                        <div class="goal-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
+                        </div>
+                        <h4>系館空間優化</h4>
+                        <p>改善學生討論室、公共交流空間的硬體設備，營造更優質的學習環境。</p>
                     </div>
                     <div class="goal-box">
-                        <div class="goal-icon">🤝</div>
-                        <h4>學生活動</h4>
-                        <p>補助系隊、宿營及各類學生活動經費。</p>
+                        <div class="goal-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a5.971 5.971 0 00-.941 3.196M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
+                        </div>
+                        <h4>學生活動發展</h4>
+                        <p>補助系隊比賽、宿營及各類學藝活動經費，促進學生多元發展與交流。</p>
                     </div>
                 </div>
             </section>
 
             <section id="faq">
                 <div class="section-header">
-                    <h2>常見問題 (FAQ)</h2>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1012.879 12.121c-.545 0-1.091-.18-1.545-.541a4.5 4.5 0 01-.982-4.982 4.5 4.5 0 015.964-5.964 4.5 4.5 0 01.982 4.982M15 21h.008v.008H15V21zm0-3h.008v.008H15V18z" /></svg>
+                        常見問題 (FAQ)
+                    </h2>
                 </div>
                 <details>
                     <summary>捐款收據多久會收到？</summary>
